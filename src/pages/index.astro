@@ -1,49 +1,423 @@
----
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
----
-
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title="Brandon Walker | Portfolio" description="A transcendent portfolio showcasing Brandon Walker's expertise in Information Systems, Web Development, and Service Management." />
+		<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+		<style>
+			/* Enhanced typography and transcendent styling with ultraviolet glow for links */
+			body {
+				background: #0f172a;
+				color: #e2e8f0;
+				font-family: 'Inter', sans-serif;
+				line-height: 1.7;
+				overflow-x: hidden;
+				position: relative;
+			}
+			#particles-js {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: -1;
+				background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+			}
+			.hero-section {
+				min-height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				position: relative;
+				padding: 2rem;
+			}
+			.hero-overlay {
+				background: rgba(15, 23, 42, 0.8);
+				padding: 4rem;
+				border-radius: 1rem;
+				backdrop-filter: blur(10px);
+				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+				animation: fadeIn 1.5s ease-in-out;
+			}
+			.section-title {
+				color: #a78bfa;
+				font-family: 'Playfair Display', serif;
+				font-size: 3rem;
+				font-weight: 700;
+				margin-bottom: 2rem;
+				position: relative;
+				display: inline-block;
+				text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+			}
+			.section-title::after {
+				content: '';
+				position: absolute;
+				width: 60%;
+				height: 4px;
+				background: linear-gradient(to right, #a78bfa, #4f46e5);
+				bottom: -0.75rem;
+				left: 20%;
+				border-radius: 2px;
+			}
+			.card {
+				background: rgba(30, 27, 75, 0.9);
+				border-radius: 1.5rem;
+				padding: 2.5rem;
+				box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+				transition: transform 0.4s ease, box-shadow 0.4s ease;
+				backdrop-filter: blur(5px);
+			}
+			.card:hover {
+				transform: translateY(-15px);
+				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+			}
+			.skill-chip {
+				display: inline-block;
+				background: linear-gradient(45deg, #a78bfa, #4f46e5);
+				color: #fff;
+				padding: 0.6rem 1.2rem;
+				border-radius: 9999px;
+				margin: 0.5rem;
+				font-size: 1rem;
+				font-weight: 600;
+				transition: transform 0.3s ease, box-shadow 0.3s ease;
+			}
+			.skill-chip:hover {
+				transform: scale(1.1);
+				box-shadow: 0 0 15px rgba(167, 139, 250, 0.7);
+			}
+			.carousel-img {
+				width: 100%;
+				height: 250px;
+				object-fit: cover;
+				border-radius: 1rem;
+				transition: transform 0.3s ease;
+			}
+			.carousel-img:hover {
+				transform: scale(1.05);
+			}
+			.contact-section {
+				background: rgba(30, 27, 75, 0.9);
+				border-radius: 1.5rem;
+				padding: 4rem;
+				text-align: center;
+				backdrop-filter: blur(5px);
+			}
+			.glow-link {
+				color: #c4b5fd;
+				text-decoration: none;
+				position: relative;
+				transition: color 0.3s ease;
+			}
+			.glow-link:hover {
+				color: #e879f9;
+				text-shadow: 0 0 10px #a78bfa, 0 0 20px #a78bfa;
+			}
+			.glow-link::after {
+				content: '';
+				position: absolute;
+				width: 0;
+				height: 2px;
+				background: #a78bfa;
+				left: 0;
+				bottom: -2px;
+				transition: width 0.3s ease;
+			}
+			.glow-link:hover::after {
+				width: 100%;
+			}
+			.carousel-container {
+				position: relative;
+				overflow: hidden;
+				width: 100%;
+			}
+			.carousel-track {
+				display: flex;
+				transition: transform 0.5s ease-in-out;
+			}
+			.carousel-item {
+				min-width: 50%;
+				padding: 0 1rem;
+				box-sizing: border-box;
+			}
+			.carousel-button {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				background: linear-gradient(45deg, #a78bfa, #4f46e5);
+				color: #fff;
+				border: none;
+				border-radius: 50%;
+				width: 40px;
+				height: 40px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				transition: transform 0.3s ease, box-shadow 0.3s ease;
+			}
+			.carousel-button:hover {
+				transform: translateY(-50%) scale(1.1);
+				box-shadow: 0 0 15px rgba(167, 139, 250, 0.7);
+			}
+			.carousel-button.prev {
+				left: 10px;
+			}
+			.carousel-button.next {
+				right: 10px;
+			}
+			@keyframes fadeIn {
+				0% { opacity: 0; transform: translateY(20px); }
+				100% { opacity: 1; transform: translateY(0); }
+			}
+			@keyframes pulse {
+				0% { transform: scale(1); }
+				50% { transform: scale(1.05); }
+				100% { transform: scale(1); }
+			}
+			.hero-overlay h1 {
+				animation: pulse 3s infinite ease-in-out;
+			}
+		</style>
 	</head>
 	<body>
+		<div id="particles-js"></div>
 		<Header />
 		<main>
-			<h1> Welcome to the portfolio of Brandon Walker</h1>
-			<p>
-				High School Diploma:  Pierce County High School
-				Middle Georgia University : Information Systems Bachelors Degree
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<!-- Hero Section -->
+			<section class="hero-section">
+				<div class="hero-overlay">
+					<h1 class="text-6xl font-bold text-white mb-4 font-playfair">Brandon Walker</h1>
+					<p class="text-2xl text-gray-200 font-inter">Service Manager | Information Systems & Web Development</p>
+					<p class="text-lg text-gray-300 mt-3 font-inter">Blackshear, GA | <a href="mailto:blwaterwind@gmail.com" class="glow-link">blwaterwind@gmail.com</a> | <a href="tel:+19127228884" class="glow-link">+1 912-722-8884 (Text Only)</a></p>
+				</div>
+			</section>
+
+			<!-- About Section -->
+			<section class="py-20 px-4 md:px-8">
+				<div class="max-w-7xl mx-auto">
+					<h2 class="section-title">About Me</h2>
+					<div class="card">
+						<p class="text-lg font-inter">
+							A visionary professional with over 5 years of expertise in software development and 9 years in food safety and service management. Proficient in Python, C#, Java, Unity, SQL, Git, and APIs, with a Bachelor’s degree in Information Technology from Middle Georgia University. Certified in ServSafe and Situational Management Training, I thrive in dynamic environments, crafting innovative solutions with precision and leadership. Ready to relocate anywhere and authorized to work in the US for any employer.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Work Experience Section -->
+			<section class="py-20 px-4 md:px-8 bg-gray-900/50">
+				<div class="max-w-7xl mx-auto">
+					<h2 class="section-title">Work Experience</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+						<div class="card">
+							<h3 class="text-2xl font-semibold text-white font-playfair">Quality Assurance Analyst</h3>
+							<p class="text-gray-400 font-inter">TELUS Digital (Remote) | Feb 2024 - Present</p>
+							<ul class="list-disc list-inside mt-4 text-gray-300 font-inter">
+								<li>Orchestrated quality assurance and training for AI agents, enhancing system reliability.</li>
+								<li>Implemented rigorous testing protocols to ensure top-tier software performance.</li>
+							</ul>
+						</div>
+						<div class="card">
+							<h3 class="text-2xl font-semibold text-white font-playfair">Assistant Store Manager</h3>
+							<p class="text-gray-400 font-inter">Zoner's Pizza, Wings & Waffles, Waycross, GA | Jul 2020 - Mar 2025</p>
+							<ul class="list-disc list-inside mt-4 text-gray-300 font-inter">
+								<li>Led employee training and optimized inventory processes using Microsoft Excel.</li>
+								<li>Managed high-volume production of pizzas, calzones, and strombolis with precision.</li>
+							</ul>
+						</div>
+						<div class="card">
+							<h3 class="text-2xl font-semibold text-white font-playfair">Wal-Mart Associate</h3>
+							<p class="text-gray-400 font-inter">Walmart Supercenter, Waycross, GA | Dec 2018 - Jul 2020</p>
+							<ul class="list-disc list-inside mt-4 text-gray-300 font-inter">
+								<li>Ensured food safety across deli, produce, bakery, and meat departments.</li>
+								<li>Mastered sanitation protocols and commercial equipment operation.</li>
+							</ul>
+						</div>
+						<div class="card">
+							<h3 class="text-2xl font-semibold text-white font-playfair">Assistant Store Manager</h3>
+							<p class="text-gray-400 font-inter">Zoner's Pizza, Wings & Waffles, Waycross, GA | Mar 2016 - Dec 2018</p>
+							<ul class="list-disc list-inside mt-4 text-gray-300 font-inter">
+								<li>Streamlined employee training and nightly reporting processes.</li>
+								<li>Enhanced production efficiency in a fast-paced culinary environment.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Education Section -->
+			<section class="py-20 px-4 md:px-8">
+				<div class="max-w-7xl mx-auto">
+					<h2 class="section-title">Education</h2>
+					<div class="card">
+						<h3 class="text-2xl font-semibold text-white font-playfair">Bachelor’s in Information Technology</h3>
+						<p class="text-gray-400 font-inter">Middle Georgia University, Macon, GA | May 2023 - Oct 2026</p>
+						<h3 class="text-2xl font-semibold text-white font-playfair mt-6">High School Diploma</h3>
+						<p class="text-gray-400 font-inter">Pierce County High School, Blackshear, GA | 2011 - 2015</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Skills Section -->
+			<section class="py-20 px-4 md:px-8 bg-gray-900/50">
+				<div class="max-w-7xl mx-auto">
+					<h2 class="section-title">Skills</h2>
+					<div class="card">
+						<div class="flex flex-wrap">
+							<span class="skill-chip">Python</span>
+							<span class="skill-chip">C#</span>
+							<span class="skill-chip">Java</span>
+							<span class="skill-chip">Unity</span>
+							<span class="skill-chip">SQL</span>
+							<span class="skill-chip">Git</span>
+							<span class="skill-chip">APIs</span>
+							<span class="skill-chip">Software Development</span>
+							<span class="skill-chip">Data Analysis</span>
+							<span class="skill-chip">Store Management</span>
+							<span class="skill-chip">Food Safety</span>
+							<span class="skill-chip">Inventory Control</span>
+							<span class="skill-chip">Customer Service</span>
+							<span class="skill-chip">Conflict Resolution</span>
+							<span class="skill-chip">Financial Reporting</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Gallery Section -->
+			<section class="py-20 px-4 md:px-8">
+				<div class="max-w-7xl mx-auto">
+					<h2 class="section-title">Gallery</h2>
+					<div class="card">
+						<div class="carousel-container">
+							<div class="carousel-track" id="carousel-track">
+								<div class="carousel-item">
+									<img src="https://via.placeholder.com/400x250?text=Gallery+Image+1" alt="Gallery Image 1" class="carousel-img">
+								</div>
+								<div class="carousel-item">
+									<img src="https://via.placeholder.com/400x250?text=Gallery+Image+2" alt="Gallery Image 2" class="carousel-img">
+								</div>
+								<div class="carousel-item">
+									<img src="https://via.placeholder.com/400x250?text=Gallery+Image+3" alt="Gallery Image 3" class="carousel-img">
+								</div>
+								<div class="carousel-item">
+									<img src="https://via.placeholder.com/400x250?text=Gallery+Image+4" alt="Gallery Image 4" class="carousel-img">
+								</div>
+							</div>
+							<button class="carousel-button prev" onclick="moveCarousel(-1)">&#10094;</button>
+							<button class="carousel-button next" onclick="moveCarousel(1)">&#10095;</button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Certifications Section -->
+			<section class="py-20 px-4 md:px-8 bg-gray-900/50">
+				<div class="max-w-7xl mx-auto">
+					<h2 class="section-title">Certifications</h2>
+					<div class="card">
+						<ul class="list-disc list-inside text-gray-300 font-inter">
+							<li>ServSafe Food Handler Certification (2016 - 2020)</li>
+							<li><a href="https://situational.com/what-we-do/curriculum/situational-leadership-curriculum/situational-leadership-essentials/" class="glow-link">Situational Management Training</a></li>
+							<li>Microsoft PowerPoint 2010</li>
+							<li>Driver’s License (Georgia)</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<!-- Contact Section -->
+			<section class="py-20 px-4 md:px-8">
+				<div class="max-w-7xl mx-auto contact-section">
+					<h2 class="section-title">Get in Touch</h2>
+					<p class="text-lg text-gray-300 mb-6 font-inter">Let’s connect to explore collaboration opportunities or discuss my work in greater detail.</p>
+					<ul class="text-lg text-gray-300 font-inter space-y-2">
+						<li>Personal Email: <a href="mailto:blwaterwind@gmail.com" class="glow-link">blwaterwind@gmail.com</a></li>
+						<li>Work Email: <a href="mailto:sanctumnetwork.1@gmail.com" class="glow-link">sanctumnetwork.1@gmail.com</a></li>
+						<li>Phone: <a href="tel:+19127228884" class="glow-link">+1 912-722-8884 (Text Only)</a></li>
+						<li>Discord: <a href="https://discord.com/users/water_wind_" class="glow-link">water_wind_</a></li>
+						<li>GitHub: <a href="https://github.com/Water-Wind-Official" class="glow-link">Water-Wind-Official</a></li>
+						<li>Sanctum Network Community: <a href="https://discord.gg/G9baugNyvD" class="glow-link">Join on Discord</a></li>
+					</ul>
+				</div>
+			</section>
 		</main>
 		<Footer />
+		<script>
+			particlesJS('particles-js', {
+				particles: {
+					number: { value: 80, density: { enable: true, value_area: 800 } },
+					color: { value: '#a78bfa' },
+					shape: {
+						type: 'circle',
+						stroke: { width: 0, color: '#000000' },
+						polygon: { nb_sides: 5 },
+					},
+					opacity: {
+						value: 0.5,
+						random: true,
+						anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false },
+					},
+					size: {
+						value: 3,
+						random: true,
+						anim: { enable: false, speed: 40, size_min: 0.1, sync: false },
+					},
+					line_linked: {
+						enable: true,
+						distance: 150,
+						color: '#a78bfa',
+						opacity: 0.4,
+						width: 1,
+					},
+					move: {
+						enable: true,
+						speed: 3,
+						direction: 'none',
+						random: false,
+						straight: false,
+						out_mode: 'out',
+						bounce: false,
+						attract: { enable: false, rotateX: 600, rotateY: 1200 },
+					},
+				},
+				interactivity: {
+					detect_on: 'canvas',
+					events: {
+						onhover: { enable: true, mode: 'grab' },
+						onclick: { enable: true, mode: 'push' },
+						resize: true,
+					},
+					modes: {
+						grab: { distance: 140, line_linked: { opacity: 1 } },
+						bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
+						repulse: { distance: 200, duration: 0.4 },
+						push: { particles_nb: 4 },
+						remove: { particles_nb: 2 },
+					},
+				},
+				retina_detect: true,
+			});
+
+			// Carousel functionality
+			let currentIndex = 0;
+			const track = document.getElementById('carousel-track');
+			const items = document.querySelectorAll('.carousel-item');
+			const totalItems = items.length;
+
+			function moveCarousel(direction) {
+				currentIndex += direction * 2; // Move by 2 items
+				if (currentIndex < 0) {
+					currentIndex = totalItems - 2; // Loop to end
+				} else if (currentIndex >= totalItems) {
+					currentIndex = 0; // Loop to start
+				}
+				const offset = -(currentIndex * 50); // 50% per item (since 2 items are shown)
+				track.style.transform = `translateX(${offset}%)`;
+			}
+		</script>
 	</body>
 </html>
