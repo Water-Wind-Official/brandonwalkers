@@ -109,11 +109,37 @@ import Footer from '../components/Footer.astro';
     width: 100%;
     height: 250px;
     object-fit: cover;
+    object-position: center;
     border-radius: 1rem;
     transition: transform 0.3s ease;
+    display: block;
+    filter: contrast(1.1) brightness(1.05) saturate(1.1) sepia(0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    max-width: 100%;
+    transform: translateZ(0);
+    will-change: transform;
   }
   .carousel-img:hover {
     transform: scale(1.05);
+    filter: contrast(1.15) brightness(1.1) saturate(1.2) sepia(0.15);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  /* General image styling for all images */
+  img {
+    filter: contrast(1.1) brightness(1.05) saturate(1.1) sepia(0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: filter 0.3s ease, box-shadow 0.3s ease;
+  }
+  img:hover {
+    filter: contrast(1.15) brightness(1.1) saturate(1.2) sepia(0.15);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Override for specific image types that shouldn't have filters */
+  img[src*="favicon"], img[alt*="icon"] {
+    filter: none;
+    box-shadow: none;
   }
   .contact-section {
     background: rgba(30, 27, 75, 0.9);
@@ -150,14 +176,24 @@ import Footer from '../components/Footer.astro';
     overflow: hidden;
     width: 100%;
   }
-  .carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-  }
   .carousel-item {
     min-width: 50%;
     padding: 0 1rem;
     box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 1rem;
+  }
+  .carousel-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: max-content;
+    transform: translateZ(0);
+    will-change: transform;
   }
   .carousel-button {
     position: absolute;
