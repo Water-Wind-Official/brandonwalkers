@@ -32,6 +32,11 @@ import Footer from '../components/Footer.astro';
 				height: 100%;
 				z-index: -1;
 				background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+				opacity: 1;
+				transition: opacity 0.3s ease-out;
+			}
+			#particles-js.fade-out {
+				opacity: 0;
 			}
 			.whirlwind-overlay {
 				position: fixed;
@@ -42,9 +47,9 @@ import Footer from '../components/Footer.astro';
 				z-index: 10;
 				pointer-events: none;
 				opacity: 1;
-				transition: opacity 1s ease-out;
+				transition: opacity 0.3s ease-out;
 			}
-			.whirlwind-overlay.hidden {
+			.whirlwind-overlay.fade-out {
 				opacity: 0;
 			}
 			.whirlwind {
@@ -75,6 +80,15 @@ import Footer from '../components/Footer.astro';
 				backdrop-filter: blur(10px);
 				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 				animation: fadeIn 1.5s ease-in-out;
+			}
+			.content-section {
+				transform: translateY(100vh);
+				opacity: 0;
+				transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+			}
+			.content-section.visible {
+				transform: translateY(0);
+				opacity: 1;
 			}
 			.section-title {
 				color: #7c3aed;
@@ -231,7 +245,7 @@ import Footer from '../components/Footer.astro';
 					<p class="text-lg text-gray-300 mt-3 font-inter">Blackshear, GA | <a href="mailto:blwaterwind@gmail.com" class="glow-link">blwaterwind@gmail.com</a> | <a href="tel:+19127228884" class="glow-link">+1 912-722-8884 (Text Only)</a></p>
 				</div>
 			</section>
-			<section class="py-20 px-4 md:px-8">
+			<section class="content-section py-20 px-4 md:px-8">
 				<div class="max-w-7xl mx-auto">
 					<h2 class="section-title">About Me</h2>
 					<div class="card">
@@ -241,7 +255,7 @@ import Footer from '../components/Footer.astro';
 					</div>
 				</div>
 			</section>
-			<section class="py-20 px-4 md:px-8 bg-gray-900/50">
+			<section class="content-section py-20 px-4 md:px-8 bg-gray-900/50">
 				<div class="max-w-7xl mx-auto">
 					<h2 class="section-title">Work Experience</h2>
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -280,7 +294,7 @@ import Footer from '../components/Footer.astro';
 					</div>
 				</div>
 			</section>
-			<section class="py-20 px-4 md:px-8">
+			<section class="content-section py-20 px-4 md:px-8">
 				<div class="max-w-7xl mx-auto">
 					<h2 class="section-title">Education</h2>
 					<div class="card">
@@ -291,7 +305,7 @@ import Footer from '../components/Footer.astro';
 					</div>
 				</div>
 			</section>
-			<section class="py-20 px-4 md:px-8 bg-gray-900/50">
+			<section class="content-section py-20 px-4 md:px-8 bg-gray-900/50">
 				<div class="max-w-7xl mx-auto">
 					<h2 class="section-title">Skills</h2>
 					<div class="card">
@@ -315,7 +329,7 @@ import Footer from '../components/Footer.astro';
 					</div>
 				</div>
 			</section>
-			<section class="py-20 px-4 md:px-8">
+			<section class="content-section py-20 px-4 md:px-8">
 				<div class="max-w-7xl mx-auto">
 					<h2 class="section-title">Gallery</h2>
 					<div class="card">
@@ -340,7 +354,7 @@ import Footer from '../components/Footer.astro';
 					</div>
 				</div>
 			</section>
-			<section class="py-20 px-4 md:px-8 bg-gray-900/50">
+			<section class="content-section py-20 px-4 md:px-8 bg-gray-900/50">
 				<div class="max-w-7xl mx-auto">
 					<h2 class="section-title">Certifications</h2>
 					<div class="card">
@@ -353,7 +367,7 @@ import Footer from '../components/Footer.astro';
 					</div>
 				</div>
 			</section>
-			<section class="py-20 px-4 md:px-8">
+			<section class="content-section py-20 px-4 md:px-8">
 				<div class="max-w-7xl mx-auto contact-section">
 					<h2 class="section-title">Get in Touch</h2>
 					<p class="text-lg text-gray-300 mb-6 font-inter">Let’s connect to explore collaboration opportunities or discuss my work in greater detail.</p>
@@ -469,12 +483,23 @@ import Footer from '../components/Footer.astro';
 			}
 
 			const whirlwind = document.getElementById('whirlwind');
+			const particles = document.getElementById('particles-js');
 			const handleScroll = debounce(() => {
 				if (window.scrollY > 50) {
-					whirlwind.classList.add('hidden');
-					destroyParticles();
+					whirlwind.classList.add('fade-out');
+					particles.classList.add('fade-out');
+					setTimeout(() => {
+						if (whirlwind.classList.contains('fade-out')) {
+							whirlwind.classList.remove('fade-out');
+							destroyParticles();
+						}
+						if (particles.classList.contains('fade-out')) {
+							particles.classList.remove('fade-out');
+						}
+					}, 300);
 				} else {
-					whirlwind.classList.remove('hidden');
+					whirlwind.classList.remove('fade-out');
+					particles.classList.remove('fade-out');
 					if (!window.pJSDom || window.pJSDom.length === 0) {
 						initializeParticles();
 					}
@@ -484,6 +509,17 @@ import Footer from '../components/Footer.astro';
 			window.addEventListener('scroll', handleScroll);
 
 			window.addEventListener('load', () => {
+				const sections = document.querySelectorAll('.content-section');
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('visible');
+							observer.unobserve(entry.target);
+						}
+					});
+				}, { threshold: 0.1 });
+				sections.forEach(section => observer.observe(section));
+
 				const canvas = document.querySelector('#particles-js canvas');
 				if (!canvas && typeof particlesJS === 'undefined') {
 					document.getElementById('particles-js').style.display = 'none';
