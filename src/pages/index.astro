@@ -173,10 +173,6 @@ import Footer from '../components/Footer.astro';
       max-width: 85vw;
       max-height: 85vw;
     }
-    .carousel-item {
-      width: 300px;
-      height: 300px;
-    }
     .carousel-button {
       width: 40px;
       height: 40px;
@@ -202,11 +198,23 @@ import Footer from '../components/Footer.astro';
     justify-content: center;
   }
   .carousel-item {
-    width: 400px;
-    height: 400px;
-    position: relative;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 100%;
     overflow: hidden;
     border-radius: 1rem;
+    opacity: 0;
+    transition: left 0.5s ease-in-out, opacity 0.3s ease-in-out;
+  }
+  .carousel-item.active {
+    left: 0;
+    opacity: 1;
+  }
+  .carousel-item.prev {
+    left: -100%;
+    opacity: 0;
   }
   .carousel-item:nth-child(1) { --index: 0; }
   .carousel-item:nth-child(2) { --index: 1; }
@@ -219,44 +227,18 @@ import Footer from '../components/Footer.astro';
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 8s ease-in-out;
-    transform-origin: center;
     filter: contrast(1.1) brightness(1.05) saturate(1.1) sepia(0.1);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    animation: subtleMove 20s ease-in-out infinite alternate;
-    animation-delay: calc(var(--index, 0) * 5s);
+    transition: filter 0.3s ease, box-shadow 0.3s ease;
   }
   .carousel-item:hover img {
-    transform: scale(1.1) rotate(1deg);
     filter: contrast(1.15) brightness(1.1) saturate(1.2) sepia(0.15);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-    animation-play-state: paused;
-  }
-
-  @keyframes subtleMove {
-    0% {
-      transform: translate(0, 0) scale(1);
-    }
-    25% {
-      transform: translate(-10px, -5px) scale(1.02);
-    }
-    50% {
-      transform: translate(5px, -10px) scale(1.01);
-    }
-    75% {
-      transform: translate(-5px, 5px) scale(1.02);
-    }
-    100% {
-      transform: translate(10px, 10px) scale(1);
-    }
   }
   .carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    width: max-content;
-    transform: translateZ(0);
-    will-change: transform;
-    gap: 2rem;
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
   .carousel-button {
     position: absolute;
@@ -403,12 +385,12 @@ import Footer from '../components/Footer.astro';
 						<div class="carousel-container">
 							<div class="image-display-window">
 								<div class="carousel-track" id="carousel-track">
-								<div class="carousel-item">
-									<img src="https://20231208-180227.tiiny.site/20231208_180227.jpg" alt="Gallery Image 1">
-								</div>
-								<div class="carousel-item">
-									<img src="https://20231208-180227.tiiny.site/20231210_175154.jpg" alt="Gallery Image 2">
-								</div>
+									<div class="carousel-item">
+										<img src="https://20231208-180227.tiiny.site/20231208_180227.jpg" alt="Gallery Image 1">
+									</div>
+									<div class="carousel-item">
+										<img src="https://20231208-180227.tiiny.site/20231210_175154.jpg" alt="Gallery Image 2">
+									</div>
 								</div>
 								<button class="carousel-button prev" onclick="moveCarousel(-1)">&#10094;</button>
 								<button class="carousel-button next" onclick="moveCarousel(1)">&#10095;</button>
@@ -526,12 +508,9 @@ import Footer from '../components/Footer.astro';
     // Ensure totalItems is at least 2 before attempting to move
     if (totalItems < 2) return;
 
-    // Move one item at a time in the display window
-    const itemsToShow = 1;
-    const itemWidth = window.innerWidth <= 480 ? 300 : 400; // Responsive width
-    const gap = 32; // 2rem gap between items (32px)
-    const maxIndex = totalItems > itemsToShow ? totalItems - itemsToShow : 0;
+    const maxIndex = totalItems - 1;
 
+    // Update current index
     currentIndex += direction;
 
     // Wrap around navigation
@@ -541,12 +520,27 @@ import Footer from '../components/Footer.astro';
       currentIndex = 0;
     }
 
-    // Calculate offset based on item width + gap
-    const offset = -(currentIndex * (itemWidth + gap));
-    if (track) {
-        track.style.transform = `translateX(${offset}px)`;
+    // Remove all classes first
+    items.forEach(item => {
+      item.classList.remove('active', 'prev');
+    });
+
+    // Set positions based on direction
+    if (direction > 0) {
+      // Moving forward - current item becomes prev, new item becomes active
+      if (currentIndex > 0) {
+        items[currentIndex - 1].classList.add('prev');
+      }
     } else {
-        console.error("Carousel track element not found");
+      // Moving backward - current item becomes prev, new item becomes active
+      if (currentIndex < totalItems - 1) {
+        items[currentIndex + 1].classList.add('prev');
+      }
+    }
+
+    // Set new active item
+    if (items[currentIndex]) {
+      items[currentIndex].classList.add('active');
     }
   }
 
@@ -563,7 +557,7 @@ import Footer from '../components/Footer.astro';
     }, { threshold: 0.1 });
     sections.forEach(section => observer.observe(section));
 
-    // Initialize carousel - adjust button visibility and positioning for 400x400 display
+    // Initialize carousel - adjust button visibility and positioning for display
     const prevButton = document.querySelector('.carousel-button.prev');
     const nextButton = document.querySelector('.carousel-button.next');
     if (totalItems <= 1) { // Hide buttons if 1 or fewer items
@@ -573,8 +567,10 @@ import Footer from '../components/Footer.astro';
         // Ensure buttons exist before trying to modify them
         if(prevButton) prevButton.style.display = 'flex';
         if(nextButton) nextButton.style.display = 'flex';
-        // Set initial position to show first image
-        moveCarousel(0);
+        // Initialize first item as active
+        if (items[0]) {
+            items[0].classList.add('active');
+        }
     }
   });
 </script>
