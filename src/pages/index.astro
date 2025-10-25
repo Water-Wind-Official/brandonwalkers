@@ -196,7 +196,7 @@ import Footer from '../components/Footer.astro';
 				<div class="hero-overlay">
 					<h1 class="text-6xl font-bold text-white mb-4 font-playfair">Brandon Walker</h1>
 					<p class="text-2xl text-gray-200 font-inter">Service Manager | Information Systems & Web Development</p>
-					<p class="text-lg text-gray-300 mt-3 font-inter">Blackshear, GA | <span class="inline-flex items-center gap-2"><span class="glow-link">blwaterwind@gmail.com</span><button onclick="copyToClipboard('blwaterwind@gmail.com')" class="text-gray-400 hover:text-white transition-colors" title="Copy email">📋</button></span> | <span class="inline-flex items-center gap-2"><span class="glow-link">+1 912-722-8884</span><button onclick="copyToClipboard('+19127228884')" class="text-gray-400 hover:text-white transition-colors" title="Copy phone">📋</button></span></p>
+					<p class="text-lg text-gray-300 mt-3 font-inter">Blackshear, GA | <span class="glow-link">blwaterwind@gmail.com</span> | <span class="glow-link">+1 912-722-8884</span></p>
 				</div>
 			</section>
 			<section class="content-section py-20 px-4 md:px-8">
@@ -316,9 +316,9 @@ import Footer from '../components/Footer.astro';
 					<h2 class="section-title">Get in Touch</h2>
 					<p class="text-lg text-gray-300 mb-6 font-inter">Let’s connect to explore collaboration opportunities or discuss my work in greater detail.</p>
 					<ul class="text-lg text-gray-300 font-inter space-y-2">
-						<li>Personal Email: <span class="inline-flex items-center gap-2"><span class="glow-link">blwaterwind@gmail.com</span><button onclick="copyToClipboard('blwaterwind@gmail.com')" class="text-gray-400 hover:text-white transition-colors" title="Copy email">📋</button></span></li>
-						<li>Work Email: <span class="inline-flex items-center gap-2"><span class="glow-link">sanctumnetwork.1@gmail.com</span><button onclick="copyToClipboard('sanctumnetwork.1@gmail.com')" class="text-gray-400 hover:text-white transition-colors" title="Copy email">📋</button></span></li>
-						<li>Phone: <span class="inline-flex items-center gap-2"><span class="glow-link">+1 912-722-8884 </span><button onclick="copyToClipboard('+19127228884')" class="text-gray-400 hover:text-white transition-colors" title="Copy phone">📋</button></span></li>
+						<li>Personal Email: <span class="glow-link">blwaterwind@gmail.com</span></li>
+						<li>Work Email: <span class="glow-link">sanctumnetwork.1@gmail.com</span></li>
+						<li>Phone: <span class="glow-link">+1 912-722-8884</span></li>
 						<li>Discord: <a href="https://discord.com/users/water_wind_" target="_blank" rel="noopener noreferrer" class="glow-link">water_wind_</a></li>
 						<li>GitHub: <a href="https://github.com/Water-Wind-Official" target="_blank" rel="noopener noreferrer" class="glow-link">Water-Wind-Official</a></li>
 					</ul>
@@ -410,70 +410,6 @@ import Footer from '../components/Footer.astro';
     sections.forEach(section => observer.observe(section));
   });
 
-  function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-      showCopyDialog('Copied to clipboard!');
-    }).catch(err => {
-      console.error('Failed to copy: ', err);
-      // Fallback for older browsers
-      const textArea = document.createElement('textarea');
-      textArea.value = text;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-
-      showCopyDialog('Copied to clipboard!');
-    });
-  }
-
-  function showCopyDialog(message) {
-    // Remove any existing copy dialogs
-    const existingDialog = document.querySelector('.copy-dialog');
-    if (existingDialog) {
-      existingDialog.remove();
-    }
-
-    // Create dialog element
-    const dialog = document.createElement('div');
-    dialog.className = 'copy-dialog';
-    dialog.textContent = message;
-    dialog.style.cssText = `
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(16, 185, 129, 0.95);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      z-index: 10000;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(5px);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    `;
-
-    document.body.appendChild(dialog);
-
-    // Fade in
-    setTimeout(() => {
-      dialog.style.opacity = '1';
-    }, 10);
-
-    // Fade out and remove
-    setTimeout(() => {
-      dialog.style.opacity = '0';
-      setTimeout(() => {
-        if (dialog.parentNode) {
-          dialog.parentNode.removeChild(dialog);
-        }
-      }, 300);
-    }, 1500);
-  }
 </script>
 	</body>
 </html> 

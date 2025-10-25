@@ -194,14 +194,8 @@ import Footer from '../components/Footer.astro';
 							<h3 class="text-xl font-semibold text-white mb-2">Discord</h3>
 							<p class="text-gray-300 mb-4">Let's chat and collaborate</p>
 							<div class="space-y-2">
-								<div class="inline-flex items-center gap-2">
-									<span class="glow-link">Personal: water_wind_</span>
-									<button onclick="copyToClipboard('water_wind_')" class="text-gray-400 hover:text-white transition-colors" title="Copy Discord username">📋</button>
-								</div>
-								<div class="inline-flex items-center gap-2">
-									<span class="glow-link">Sanctum Network Community</span>
-									<button onclick="copyToClipboard('https://discord.gg/G9baugNyvD')" class="text-gray-400 hover:text-white transition-colors" title="Copy Discord invite">📋</button>
-								</div>
+								<span class="glow-link">Personal: water_wind_</span>
+								<span class="glow-link">Sanctum Network Community</span>
 							</div>
 						</div>
 
@@ -220,10 +214,7 @@ import Footer from '../components/Footer.astro';
 							</div>
 							<h3 class="text-xl font-semibold text-white mb-2">Email</h3>
 							<p class="text-gray-300 mb-4">Personal correspondence</p>
-							<div class="inline-flex items-center gap-2">
-								<span class="glow-link">blwaterwind@gmail.com</span>
-								<button onclick="copyToClipboard('blwaterwind@gmail.com')" class="text-gray-400 hover:text-white transition-colors" title="Copy email">📋</button>
-							</div>
+							<span class="glow-link">blwaterwind@gmail.com</span>
 						</div>
 
 						<div class="social-card">
@@ -232,10 +223,7 @@ import Footer from '../components/Footer.astro';
 							</div>
 							<h3 class="text-xl font-semibold text-white mb-2">Work Email</h3>
 							<p class="text-gray-300 mb-4">Professional inquiries</p>
-							<div class="inline-flex items-center gap-2">
-								<span class="glow-link">sanctumnetwork.1@gmail.com</span>
-								<button onclick="copyToClipboard('sanctumnetwork.1@gmail.com')" class="text-gray-400 hover:text-white transition-colors" title="Copy email">📋</button>
-							</div>
+							<span class="glow-link">sanctumnetwork.1@gmail.com</span>
 						</div>
 
 						<div class="social-card">
@@ -244,10 +232,7 @@ import Footer from '../components/Footer.astro';
 							</div>
 							<h3 class="text-xl font-semibold text-white mb-2">Phone</h3>
 							<p class="text-gray-300 mb-4">Text only</p>
-							<div class="inline-flex items-center gap-2">
-								<span class="glow-link">+1 912-722-8884</span>
-								<button onclick="copyToClipboard('+19127228884')" class="text-gray-400 hover:text-white transition-colors" title="Copy phone">📋</button>
-							</div>
+							<span class="glow-link">+1 912-722-8884</span>
 						</div>
 
 						<div class="social-card">
@@ -428,70 +413,6 @@ import Footer from '../components/Footer.astro';
     sections.forEach(section => observer.observe(section));
   });
 
-  function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-      showCopyDialog('Copied to clipboard!');
-    }).catch(err => {
-      console.error('Failed to copy: ', err);
-      // Fallback for older browsers
-      const textArea = document.createElement('textarea');
-      textArea.value = text;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-
-      showCopyDialog('Copied to clipboard!');
-    });
-  }
-
-  function showCopyDialog(message) {
-    // Remove any existing copy dialogs
-    const existingDialog = document.querySelector('.copy-dialog');
-    if (existingDialog) {
-      existingDialog.remove();
-    }
-
-    // Create dialog element
-    const dialog = document.createElement('div');
-    dialog.className = 'copy-dialog';
-    dialog.textContent = message;
-    dialog.style.cssText = `
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(16, 185, 129, 0.95);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      z-index: 10000;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(5px);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    `;
-
-    document.body.appendChild(dialog);
-
-    // Fade in
-    setTimeout(() => {
-      dialog.style.opacity = '1';
-    }, 10);
-
-    // Fade out and remove
-    setTimeout(() => {
-      dialog.style.opacity = '0';
-      setTimeout(() => {
-        if (dialog.parentNode) {
-          dialog.parentNode.removeChild(dialog);
-        }
-      }, 300);
-    }, 1500);
-  }
 </script>
 	</body>
 </html>
