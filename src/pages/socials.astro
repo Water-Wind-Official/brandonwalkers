@@ -194,8 +194,14 @@ import Footer from '../components/Footer.astro';
 							<h3 class="text-xl font-semibold text-white mb-2">Discord</h3>
 							<p class="text-gray-300 mb-4">Let's chat and collaborate</p>
 							<div class="space-y-2">
-								<a href="https://discord.com/users/water_wind_" target="_blank" rel="noopener noreferrer" class="glow-link block">Personal: water_wind_</a>
-								<a href="https://discord.gg/G9baugNyvD" target="_blank" rel="noopener noreferrer" class="glow-link block">Sanctum Network Community</a>
+								<div class="inline-flex items-center gap-2">
+									<span class="glow-link">Personal: water_wind_</span>
+									<button onclick="copyToClipboard('water_wind_')" class="text-gray-400 hover:text-white transition-colors" title="Copy Discord username">📋</button>
+								</div>
+								<div class="inline-flex items-center gap-2">
+									<span class="glow-link">Sanctum Network Community</span>
+									<button onclick="copyToClipboard('https://discord.gg/G9baugNyvD')" class="text-gray-400 hover:text-white transition-colors" title="Copy Discord invite">📋</button>
+								</div>
 							</div>
 						</div>
 
@@ -214,7 +220,10 @@ import Footer from '../components/Footer.astro';
 							</div>
 							<h3 class="text-xl font-semibold text-white mb-2">Email</h3>
 							<p class="text-gray-300 mb-4">Personal correspondence</p>
-							<a href="mailto:blwaterwind@gmail.com" target="_blank" rel="noopener noreferrer" class="glow-link">blwaterwind@gmail.com</a>
+							<div class="inline-flex items-center gap-2">
+								<span class="glow-link">blwaterwind@gmail.com</span>
+								<button onclick="copyToClipboard('blwaterwind@gmail.com')" class="text-gray-400 hover:text-white transition-colors" title="Copy email">📋</button>
+							</div>
 						</div>
 
 						<div class="social-card">
@@ -223,7 +232,10 @@ import Footer from '../components/Footer.astro';
 							</div>
 							<h3 class="text-xl font-semibold text-white mb-2">Work Email</h3>
 							<p class="text-gray-300 mb-4">Professional inquiries</p>
-							<a href="mailto:sanctumnetwork.1@gmail.com" target="_blank" rel="noopener noreferrer" class="glow-link">sanctumnetwork.1@gmail.com</a>
+							<div class="inline-flex items-center gap-2">
+								<span class="glow-link">sanctumnetwork.1@gmail.com</span>
+								<button onclick="copyToClipboard('sanctumnetwork.1@gmail.com')" class="text-gray-400 hover:text-white transition-colors" title="Copy email">📋</button>
+							</div>
 						</div>
 
 						<div class="social-card">
@@ -232,7 +244,10 @@ import Footer from '../components/Footer.astro';
 							</div>
 							<h3 class="text-xl font-semibold text-white mb-2">Phone</h3>
 							<p class="text-gray-300 mb-4">Text only</p>
-							<a href="tel:+19127228884" target="_blank" rel="noopener noreferrer" class="glow-link">+1 912-722-8884</a>
+							<div class="inline-flex items-center gap-2">
+								<span class="glow-link">+1 912-722-8884</span>
+								<button onclick="copyToClipboard('+19127228884')" class="text-gray-400 hover:text-white transition-colors" title="Copy phone">📋</button>
+							</div>
 						</div>
 
 						<div class="social-card">
@@ -412,6 +427,41 @@ import Footer from '../components/Footer.astro';
     }, { threshold: 0.1 });
     sections.forEach(section => observer.observe(section));
   });
+
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      // Show a brief success indicator
+      const button = event.target;
+      const originalTitle = button.title;
+      button.title = 'Copied!';
+      button.style.color = '#10b981';
+
+      setTimeout(() => {
+        button.title = originalTitle;
+        button.style.color = '';
+      }, 1000);
+    }).catch(err => {
+      console.error('Failed to copy: ', err);
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+
+      // Show success indicator
+      const button = event.target;
+      const originalTitle = button.title;
+      button.title = 'Copied!';
+      button.style.color = '#10b981';
+
+      setTimeout(() => {
+        button.title = originalTitle;
+        button.style.color = '';
+      }, 1000);
+    });
+  }
 </script>
 	</body>
 </html>

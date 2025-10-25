@@ -196,7 +196,7 @@ import Footer from '../components/Footer.astro';
 				<div class="hero-overlay">
 					<h1 class="text-6xl font-bold text-white mb-4 font-playfair">Brandon Walker</h1>
 					<p class="text-2xl text-gray-200 font-inter">Service Manager | Information Systems & Web Development</p>
-					<p class="text-lg text-gray-300 mt-3 font-inter">Blackshear, GA | <a href="mailto:blwaterwind@gmail.com" class="glow-link">blwaterwind@gmail.com</a> | <a href="tel:+19127228884" class="glow-link">+1 912-722-8884 (Text Only)</a></p>
+					<p class="text-lg text-gray-300 mt-3 font-inter">Blackshear, GA | <span class="inline-flex items-center gap-2"><span class="glow-link">blwaterwind@gmail.com</span><button onclick="copyToClipboard('blwaterwind@gmail.com')" class="text-gray-400 hover:text-white transition-colors" title="Copy email">📋</button></span> | <span class="inline-flex items-center gap-2"><span class="glow-link">+1 912-722-8884 (Text Only)</span><button onclick="copyToClipboard('+19127228884')" class="text-gray-400 hover:text-white transition-colors" title="Copy phone">📋</button></span></p>
 				</div>
 			</section>
 			<section class="content-section py-20 px-4 md:px-8">
@@ -316,11 +316,11 @@ import Footer from '../components/Footer.astro';
 					<h2 class="section-title">Get in Touch</h2>
 					<p class="text-lg text-gray-300 mb-6 font-inter">Let’s connect to explore collaboration opportunities or discuss my work in greater detail.</p>
 					<ul class="text-lg text-gray-300 font-inter space-y-2">
-						<li>Personal Email: <a href="mailto:blwaterwind@gmail.com" class="glow-link">blwaterwind@gmail.com</a></li>
-						<li>Work Email: <a href="mailto:sanctumnetwork.1@gmail.com" class="glow-link">sanctumnetwork.1@gmail.com</a></li>
-						<li>Phone: <a href="tel:+19127228884" class="glow-link">+1 912-722-8884 (Text Only)</a></li>
-						<li>Discord: <a href="https://discord.com/users/water_wind_" class="glow-link">water_wind_</a></li>
-						<li>GitHub: <a href="https://github.com/Water-Wind-Official" class="glow-link">Water-Wind-Official</a></li>
+						<li>Personal Email: <span class="inline-flex items-center gap-2"><span class="glow-link">blwaterwind@gmail.com</span><button onclick="copyToClipboard('blwaterwind@gmail.com')" class="text-gray-400 hover:text-white transition-colors" title="Copy email">📋</button></span></li>
+						<li>Work Email: <span class="inline-flex items-center gap-2"><span class="glow-link">sanctumnetwork.1@gmail.com</span><button onclick="copyToClipboard('sanctumnetwork.1@gmail.com')" class="text-gray-400 hover:text-white transition-colors" title="Copy email">📋</button></span></li>
+						<li>Phone: <span class="inline-flex items-center gap-2"><span class="glow-link">+1 912-722-8884 (Text Only)</span><button onclick="copyToClipboard('+19127228884')" class="text-gray-400 hover:text-white transition-colors" title="Copy phone">📋</button></span></li>
+						<li>Discord: <a href="https://discord.com/users/water_wind_" target="_blank" rel="noopener noreferrer" class="glow-link">water_wind_</a></li>
+						<li>GitHub: <a href="https://github.com/Water-Wind-Official" target="_blank" rel="noopener noreferrer" class="glow-link">Water-Wind-Official</a></li>
 					</ul>
 				</div>
 			</section>
@@ -409,6 +409,41 @@ import Footer from '../components/Footer.astro';
     }, { threshold: 0.1 });
     sections.forEach(section => observer.observe(section));
   });
+
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      // Show a brief success indicator
+      const button = event.target;
+      const originalTitle = button.title;
+      button.title = 'Copied!';
+      button.style.color = '#10b981';
+
+      setTimeout(() => {
+        button.title = originalTitle;
+        button.style.color = '';
+      }, 1000);
+    }).catch(err => {
+      console.error('Failed to copy: ', err);
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+
+      // Show success indicator
+      const button = event.target;
+      const originalTitle = button.title;
+      button.title = 'Copied!';
+      button.style.color = '#10b981';
+
+      setTimeout(() => {
+        button.title = originalTitle;
+        button.style.color = '';
+      }, 1000);
+    });
+  }
 </script>
 	</body>
 </html> 
