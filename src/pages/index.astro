@@ -14,7 +14,7 @@ import Footer from '../components/Footer.astro';
 		<meta name="description" content="A transcendent portfolio showcasing Brandon Walker's expertise in Information Systems, Web Development, and Service Management." />
 		<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-		<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" async id="particles-script" onerror="console.error('Failed to load particles.js')"></script>
+		<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" crossorigin="anonymous" async id="particles-script" onerror="console.error('Failed to load particles.js')"></script>
 		<style>
   body {
     background: #0f172a;
@@ -328,77 +328,125 @@ import Footer from '../components/Footer.astro';
 		</main>
 		<Footer />
 		<script>
+  let particlesInitialized = false;
+
   function initializeParticles() {
+    if (particlesInitialized) return;
+    
+    // Check if particlesJS is available
     if (typeof window.particlesJS === 'undefined') {
-      console.error('particlesJS is not available');
-      return;
+      return false;
     }
-    particlesJS('particles-js', {
-      particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: '#7c3aed' },
-        shape: {
-          type: 'circle',
-          stroke: { width: 0, color: '#000000' },
-          polygon: { nb_sides: 5 },
+
+    // Check if the container exists
+    const container = document.getElementById('particles-js');
+    if (!container) {
+      return false;
+    }
+
+    try {
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: '#7c3aed' },
+          shape: {
+            type: 'circle',
+            stroke: { width: 0, color: '#000000' },
+            polygon: { nb_sides: 5 },
+          },
+          opacity: {
+            value: 0.5,
+            random: true,
+            anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false },
+          },
+          size: {
+            value: 3,
+            random: true,
+            anim: { enable: false, speed: 40, size_min: 0.1, sync: false },
+          },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: '#7c3aed',
+            opacity: 0.4,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 3,
+            direction: 'none',
+            random: false,
+            straight: false,
+            out_mode: 'out',
+            bounce: false,
+            attract: { enable: false, rotateX: 600, rotateY: 1200 },
+          },
         },
-        opacity: {
-          value: 0.5,
-          random: true,
-          anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false },
-        }, // <<< Added missing comma here
-        size: {
-          value: 3,
-          random: true,
-          anim: { enable: false, speed: 40, size_min: 0.1, sync: false },
+        interactivity: {
+          detect_on: 'canvas',
+          events: {
+            onhover: { enable: true, mode: 'grab' },
+            onclick: { enable: true, mode: 'push' },
+            resize: true,
+          },
+          modes: {
+            grab: { distance: 140, line_linked: { opacity: 1 } },
+            bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
+            repulse: { distance: 200, duration: 0.4 },
+            push: { particles_nb: 4 },
+            remove: { particles_nb: 2 },
+          },
         },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: '#7c3aed',
-          opacity: 0.4,
-          width: 1,
-        },
-        move: {
-          enable: true,
-          speed: 3,
-          direction: 'none',
-          random: false,
-          straight: false,
-          out_mode: 'out',
-          bounce: false,
-          attract: { enable: false, rotateX: 600, rotateY: 1200 },
-        },
-      },
-      interactivity: {
-        detect_on: 'canvas',
-        events: {
-          onhover: { enable: true, mode: 'grab' },
-          onclick: { enable: true, mode: 'push' },
-          resize: true,
-        },
-        modes: {
-          grab: { distance: 140, line_linked: { opacity: 1 } },
-          bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
-          repulse: { distance: 200, duration: 0.4 },
-          push: { particles_nb: 4 },
-          remove: { particles_nb: 2 },
-        },
-      },
-      retina_detect: true,
-    });
+        retina_detect: true,
+      });
+      particlesInitialized = true;
+      return true;
+    } catch (error) {
+      console.error('Error initializing particles:', error);
+      return false;
+    }
   }
 
+  // Try to initialize immediately if script is already loaded
+  function tryInitialize() {
+    if (initializeParticles()) {
+      return;
+    }
+    // If not ready, try again after a short delay
+    setTimeout(() => {
+      if (!particlesInitialized) {
+        initializeParticles();
+      }
+    }, 100);
+  }
+
+  // Set up script load handler
   document.addEventListener('DOMContentLoaded', () => {
     const script = document.getElementById('particles-script');
+    
     if (script) {
-      script.onload = initializeParticles;
-    } else {
-      console.error('Particles script not found');
+      // If script is already loaded
+      if (script.readyState === 'complete' || script.readyState === 'loaded') {
+        tryInitialize();
+      } else {
+        // Set up onload handler
+        script.onload = tryInitialize;
+        script.onerror = () => {
+          console.error('Failed to load particles.js - background visual may not work');
+        };
+      }
     }
+    
+    // Try initialization immediately in case script loaded before DOMContentLoaded
+    tryInitialize();
   });
 
+  // Also try on window load as a fallback
   window.addEventListener('load', () => {
+    if (!particlesInitialized) {
+      tryInitialize();
+    }
+
     const sections = document.querySelectorAll('.content-section');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
