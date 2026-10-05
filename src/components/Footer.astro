@@ -1,22 +1,37 @@
 ---
+import Icon from "./Icon.astro";
 ---
-<footer class="site-footer">
-  <p>&copy; 2026 Brandon Walker. Built with Astro, a little code, and a lot of curiosity.</p>
+
+<footer class="site-footer container">
+  <div class="footer-top">
+    <a class="footer-signature" href="/">
+      Brandon Walker<span class="mint">.</span>
+    </a>
+    <p>
+      Made of curiosity.
+      <br />
+      Built for what’s next.
+    </p>
+    <a class="back-top" href="#top">
+      Back to the surface <span>↑</span>
+    </a>
+  </div>
+  <div class="footer-bottom">
+    <span>© {new Date().getFullYear()} Brandon Walker</span>
+    <div>
+      <a href="/interests">Off the clock</a>
+      <a href="/donate">Support my work</a>
+      <a
+        href="https://github.com/Water-Wind-Official"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub <Icon name="diagonal" size={12} />
+      </a>
+    </div>
+    <button class="motion-toggle" aria-pressed="false" hidden>
+      <Icon name="pause" size={13} />
+      <span>Pause motion</span>
+    </button>
+  </div>
 </footer>
-
-<style>
-  .site-footer {
-    position: relative;
-    z-index: 1;
-    padding: 1.5rem 1rem 2.5rem;
-    text-align: center;
-    color: rgba(226, 232, 240, 0.82);
-    background: rgba(15, 23, 42, 0.9);
-    border-top: 1px solid rgba(148, 163, 184, 0.14);
-  }
-
-  .site-footer p {
-    margin: 0;
-    font-size: 0.92rem;
-  }
-</style>

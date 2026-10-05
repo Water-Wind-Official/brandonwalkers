@@ -1,0 +1,23 @@
+<div class="ocean-scene" aria-hidden="true">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/cosmic-ocean-mobile.webp"
+    />
+    <img
+      class="ocean-image"
+      src="/images/cosmic-ocean.webp"
+      width="2400"
+      height="1350"
+      alt=""
+      fetchpriority="high"
+      decoding="async"
+    />
+  </picture>
+  <canvas class="ocean-canvas"></canvas>
+  <div class="ocean-vignette"></div>
+  <div class="ocean-grain"></div>
+</div>
+<script>
+  import "../scripts/ocean";
+</script>

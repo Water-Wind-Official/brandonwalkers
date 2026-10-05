@@ -1,0 +1,85 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Icon from "../components/Icon.astro";
+import WaveDivider from "../components/WaveDivider.astro";
+---
+
+<SiteLayout
+  title="Support my work — Brandon Walker"
+  description="Support Brandon Walker’s independent creative work through his shop, community, and collaborations."
+>
+  <section class="page-heading container">
+    <p class="eyebrow">A LITTLE FUEL FOR THE JOURNEY</p>
+    <h1>
+      Help good ideas
+      <br />
+      <span class="tide-accent">go a little further.</span>
+    </h1>
+    <p>
+      Thanks for taking an interest in what I make. Every purchase,
+      conversation, and shared project helps keep this creative universe
+      growing.
+    </p>
+  </section>
+  <section class="page-section container">
+    <div class="support-options">
+      <article class="support-option">
+        <Icon name="star" size={30} />
+        <h2>Find something you love.</h2>
+        <p>
+          Explore the products and projects available through my Sanctum Network
+          web shop.
+        </p>
+        <a
+          class="text-link"
+          href="https://sanctumnetwork.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Visit the shop <Icon name="diagonal" size={17} />
+        </a>
+      </article>
+      <article class="support-option">
+        <Icon name="globe" size={30} />
+        <h2>Be part of the community.</h2>
+        <p>
+          Join the conversation, share feedback, and help shape what gets built
+          next. I’m often available on Discord.
+        </p>
+        <a
+          class="text-link"
+          href="https://discord.gg/G9baugNyvD"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Join on Discord <Icon name="diagonal" size={17} />
+        </a>
+      </article>
+      <article class="support-option">
+        <Icon name="heart" size={30} />
+        <h2>Build something together.</h2>
+        <p>
+          Have a collaboration or sponsorship in mind? Tell me what you’re
+          thinking.
+        </p>
+        <a
+          class="text-link"
+          href="mailto:blwaterwind@gmail.com?subject=Supporting%20your%20work"
+        >
+          Get in touch <Icon name="diagonal" size={17} />
+        </a>
+      </article>
+    </div>
+    <p class="support-note">
+      For direct contributions or sponsorship arrangements, please{" "}
+      <a
+        class="text-link"
+        href="mailto:blwaterwind@gmail.com?subject=Contribution%20inquiry"
+      >
+        contact me by email
+      </a>
+      .
+    </p>
+  </section>
+  <WaveDivider label="THANK YOU FOR BEING PART OF THE JOURNEY" />
+</SiteLayout>

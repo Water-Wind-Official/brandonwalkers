@@ -1,0 +1,91 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Icon from "../components/Icon.astro";
+import WaveDivider from "../components/WaveDivider.astro";
+import ContactSection from "../components/ContactSection.astro";
+---
+
+<SiteLayout
+  title="Off the clock — Brandon Walker"
+  description="The oceans, cities, nature, philosophy, and imaginary worlds that inspire Brandon Walker’s creative work."
+>
+  <section class="page-heading container">
+    <p class="eyebrow">04 / OFF THE CLOCK</p>
+    <h1>
+      Follow the things
+      <br />
+      that make you <span class="tide-accent">curious.</span>
+    </h1>
+    <p>
+      A few things that pull me away from the screen. And a few that bring me
+      right back.
+    </p>
+  </section>
+  <section class="page-section container">
+    <div class="interest-feature">
+      <img
+        src="/images/ocean.webp"
+        width="1200"
+        height="1200"
+        alt="Ocean scenery from Brandon’s original portfolio"
+      />
+      <div>
+        <p class="eyebrow section-number">01 / OPEN WATER, OPEN MIND</p>
+        <h2>
+          Drawn to
+          <br />
+          <span class="tide-accent">the horizon.</span>
+        </h2>
+        <p>
+          The ocean, cruises, and travel. There’s something about open water and
+          the promise of a new place that keeps me looking outward.
+        </p>
+        <p>
+          That same sense of possibility finds its way into the digital spaces I
+          create.
+        </p>
+      </div>
+    </div>
+    <div class="interest-grid">
+      <article class="interest-tile">
+        <span>02 / THE ENERGY OF A CITY</span>
+        <h2>Metropolitan possibilities.</h2>
+        <p>
+          I’m drawn to large cities: the movement, the diversity, and the
+          feeling that there’s always another story around the corner. I’m open
+          to relocating anywhere in the US.
+        </p>
+      </article>
+      <article class="interest-tile">
+        <span>03 / THE NATURAL WORLD</span>
+        <h2>A softer kind of wonder.</h2>
+        <p>
+          Nature, conservation, and animals. Especially cats. Taking care of the
+          real world matters just as much as dreaming up new ones.
+        </p>
+      </article>
+      <article class="interest-tile">
+        <span>04 / THE BIG QUESTIONS</span>
+        <h2>Beyond the obvious.</h2>
+        <p>
+          Philosophy and esoterica keep me curious about how people make
+          meaning, see patterns, and imagine what could be.
+        </p>
+      </article>
+      <article class="interest-tile">
+        <span>05 / WORLDS IN PROGRESS</span>
+        <h2>Places that don’t exist. Yet.</h2>
+        <p>
+          3D landscaping in Unreal Engine, Minecraft modding and hosting, web
+          development, and digital spaces. I like turning an idea into somewhere
+          you can go.
+        </p>
+      </article>
+    </div>
+    <a class="text-link" style="margin-top:30px" href="/work?category=Worlds">
+      Explore the worlds I’m building <Icon name="diagonal" size={17} />
+    </a>
+  </section>
+  <WaveDivider />
+  <ContactSection />
+</SiteLayout>

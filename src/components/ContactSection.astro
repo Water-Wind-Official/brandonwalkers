@@ -1,0 +1,35 @@
+---
+import Icon from "./Icon.astro";
+import { EMAIL } from "../consts";
+---
+
+<section class="contact-section" id="contact">
+  <div class="contact-seascape" aria-hidden="true"></div>
+  <div class="container contact-inner">
+    <p class="eyebrow">
+      <span class="status-dot"></span> THERE’S SOMETHING GOOD ON THE HORIZON
+    </p>
+    <h2>
+      Let’s make
+      <br />
+      <span class="tide-accent">some waves.</span>
+    </h2>
+    <p>
+      A new idea. A new opportunity. A different way of seeing things.
+      <br class="desktop-break" /> I’d love to hear what’s on your mind.
+    </p>
+    <div class="contact-actions">
+      <a href={`mailto:${EMAIL}`} class="button button-mint">
+        Start a conversation <Icon name="diagonal" size={18} />
+      </a>
+      <button class="copy-email text-button" data-email={EMAIL} hidden>
+        <Icon name="copy" size={16} />
+        <span>Copy email</span>
+      </button>
+      <span class="sr-only copy-status" role="status"></span>
+    </div>
+    <a class="contact-email" href={`mailto:${EMAIL}`}>
+      {EMAIL}
+    </a>
+  </div>
+</section>

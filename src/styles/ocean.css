@@ -1,0 +1,1421 @@
+/* One visual language: deep water, cold light, flowing edges. */
+body {
+  background:
+    radial-gradient(ellipse at 100% 36%, #08283e55, transparent 30%),
+    radial-gradient(ellipse at 0% 68%, #08283e44, transparent 27%), var(--bg);
+}
+body::before {
+  z-index: -1;
+  height: 700px;
+  background:
+    linear-gradient(180deg, #03101d20, var(--bg)),
+    url("/images/cosmic-ocean-mobile.webp") center 40% / cover;
+  opacity: 0.26;
+}
+body.ocean-home::before {
+  display: none;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 500;
+}
+h2 {
+  letter-spacing: -0.055em;
+}
+.tide-accent {
+  font-family: var(--heading);
+  font-style: normal;
+  font-weight: 500;
+  color: #83d8f0;
+  letter-spacing: inherit;
+}
+.section-number {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #9ae1f7;
+}
+.section-number > span {
+  color: #dceef7;
+}
+.button {
+  border-radius: 100px;
+  min-height: 56px;
+  padding: 15px 25px;
+  font-size: 13px;
+}
+.button-mint {
+  color: #021c2c;
+  background: #a2e7fc;
+  box-shadow: 0 0 28px #45cfff17;
+}
+.button-mint:hover {
+  background: #d5f5ff;
+  box-shadow: 0 0 35px #45cfff40;
+}
+.button-outline {
+  background: #07182b4d;
+  border-color: #b2dff84a;
+  backdrop-filter: blur(12px);
+}
+.button-outline:hover {
+  background: #0b294599;
+  border-color: #ade8ff;
+}
+.status-dot {
+  background: #8fe5ff;
+  box-shadow: 0 0 16px #48ceffc0;
+}
+.site-header {
+  background: #030c16a8;
+  border-color: #a9def31a;
+}
+.ocean-home .site-header {
+  position: absolute;
+  inset: 0 0 auto;
+  background: linear-gradient(#020914a6, transparent);
+  backdrop-filter: none;
+  border: 0;
+}
+.navigation {
+  height: 102px;
+}
+.brand-mark {
+  border-color: #93d9f74a;
+  color: #a4e8ff;
+  transform: none;
+}
+.brand {
+  font-size: 13px;
+  letter-spacing: 1.4px;
+}
+.brand-sub {
+  color: #a3c0d5;
+  font-size: 7px;
+}
+.nav-links {
+  gap: 34px;
+  font-size: 13px;
+}
+.nav-links > a {
+  color: #d3e5ef;
+}
+.nav-links .nav-contact {
+  border-radius: 100px;
+  border-color: #b7e6ff47;
+  padding: 11px 19px;
+  background: #91dbff06;
+}
+.ocean-hero {
+  min-height: 940px;
+  height: min(1100px, 100svh);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+  background: #03101c;
+}
+.ocean-scene {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.ocean-scene picture,
+.ocean-image,
+.ocean-canvas {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.ocean-image {
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.ocean-canvas {
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+.ocean-canvas.is-ready {
+  opacity: 1;
+}
+.ocean-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      #01071055 0%,
+      #01071018 14%,
+      #01071008 35%,
+      transparent 63%,
+      #030c1600 72%,
+      #030c1680 90%,
+      #030c16 100%
+    ),
+    radial-gradient(ellipse 39% 33% at 50% 38%, #020b1770, transparent 95%);
+}
+.ocean-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+.ocean-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding-top: 170px;
+}
+.hero-kicker {
+  justify-content: center;
+  font-size: 9px;
+  letter-spacing: 2.6px;
+  color: #c6e0f1;
+  margin-bottom: 29px;
+  gap: 19px;
+}
+.hero-kicker > span {
+  width: 32px;
+  height: 1px;
+  background: #a9dfff65;
+}
+.ocean-hero h1 {
+  text-transform: uppercase;
+  font-size: clamp(74px, 8.9vw, 142px);
+  font-weight: 600;
+  letter-spacing: -0.07em;
+  line-height: 0.92;
+  margin: 0 auto 29px;
+}
+.ocean-hero h1 > span {
+  display: block;
+}
+.ocean-hero h1 > span:first-child {
+  color: #f2f9fd;
+  text-shadow: 0 4px 35px #06152a66;
+}
+.ocean-hero h1 .hero-title-depth {
+  color: #aeddf5;
+  background: linear-gradient(175deg, #f5fcff 9%, #c5eaff 43%, #68b9e3 84%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 9px;
+}
+.ocean-intro {
+  color: #d0e2ef;
+  font-size: 15px;
+  line-height: 1.85;
+  margin: 0 auto 27px;
+  text-shadow: 0 2px 14px #03101b;
+}
+.ocean-intro strong {
+  color: white;
+  font-weight: 500;
+}
+.ocean-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.ocean-hero-rail {
+  position: absolute;
+  bottom: 45px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  z-index: 3;
+}
+.ocean-scroll {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 8px;
+  letter-spacing: 1.7px;
+  line-height: 1.6;
+  color: #c8e3ef;
+}
+.scroll-circle {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #b1e8ff44;
+  border-radius: 50%;
+  font-size: 23px;
+  font-weight: 300;
+  background: #09203522;
+}
+.ocean-location {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 8px;
+  letter-spacing: 1.6px;
+  color: #c2d9e8;
+}
+.hyperspace-button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid #a7e4ff42;
+  border-radius: 40px;
+  padding: 10px 17px;
+  font-size: 10px;
+  color: #d3ebf9;
+  background: #08233875;
+  backdrop-filter: blur(12px);
+  transition: background 0.3s;
+}
+.hyperspace-button:hover {
+  background: #103d5e;
+}
+.hero-depth-marker {
+  position: absolute;
+  right: 33px;
+  top: 34%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  writing-mode: vertical-rl;
+  font-size: 7px;
+  letter-spacing: 2px;
+  color: #9abdd5;
+}
+.hero-depth-marker i {
+  height: 100px;
+  width: 1px;
+  background: linear-gradient(#a3d6f188, transparent);
+}
+.hero-depth-marker > span:last-child {
+  font-size: 21px;
+}
+.ocean-current-band {
+  position: relative;
+  border-block: 1px solid #7db5d222;
+  background: linear-gradient(90deg, #09223788, #071a2a22, #09223788);
+}
+.expertise-strip {
+  padding-block: 29px;
+  border: 0;
+  font-size: 10px;
+  letter-spacing: 2.8px;
+  color: #a4bfce;
+}
+.expertise-strip > svg {
+  color: #83d9ed;
+}
+.selected-work {
+  padding-top: 115px;
+  padding-bottom: 80px;
+}
+.selected-work .section-heading {
+  margin-bottom: 53px;
+}
+.section-heading h2 {
+  font-size: clamp(37px, 4.1vw, 59px);
+  line-height: 1.1;
+}
+.section-heading-aside {
+  padding-bottom: 2px;
+}
+.section-heading-aside > p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+.text-link {
+  border-color: #b1d9ec44;
+  color: #d5e9f5;
+}
+.featured-projects {
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: 42px 30px;
+}
+.featured-projects .project-card:last-child {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: 30px;
+  align-items: center;
+  padding: 24px;
+  border: 1px solid #78bde528;
+  border-radius: 14px;
+  background: linear-gradient(100deg, #0a223080, #06172570);
+}
+.featured-projects .project-card:last-child .project-art {
+  height: 280px;
+}
+.featured-projects .project-card:last-child .project-info {
+  padding: 25px;
+}
+.featured-projects .project-art {
+  height: 390px;
+}
+.project-art-link {
+  border-radius: 12px;
+  border: 1px solid #a7d7f021;
+}
+.project-art-link:hover .project-art {
+  transform: scale(1.025);
+}
+.project-open {
+  width: 41px;
+  height: 41px;
+  right: 18px;
+  top: 18px;
+  background: #06172680;
+  border-color: #abdaef55;
+}
+.project-open:hover,
+.project-art-link:hover .project-open {
+  background: #a2e7fc;
+  color: #061c2c;
+}
+.project-meta {
+  font-size: 9px;
+  color: #a6c4d5;
+}
+.project-info h3 {
+  font-size: 25px;
+  font-weight: 500;
+}
+.project-info p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #9eb7c9;
+}
+.featured-projects .project-info h3 {
+  font-size: 29px;
+}
+.featured-projects .project-info p {
+  max-width: 490px;
+  font-size: 14px;
+}
+.featured-projects .project-info {
+  padding-top: 23px;
+}
+.featured-projects .project-meta {
+  margin-bottom: 15px;
+  font-size: 10px;
+}
+.featured-projects .project-meta > div > span {
+  font-size: 8px;
+  padding: 4px 8px;
+}
+.art-sanctum {
+  background:
+    radial-gradient(ellipse at 50% 50%, #234c8170, transparent 70%),
+    linear-gradient(135deg, #071b30, #101d39);
+}
+.sanctum-symbol {
+  color: #d3eafe;
+  text-shadow: 0 6px 35px #69b9ff55;
+}
+.sanctum-orbit {
+  border-color: #96c8ff66;
+  box-shadow:
+    0 0 35px #669cff33,
+    inset 0 0 30px #70beff22;
+}
+.sanctum-orbit::after {
+  border-color: #93d9f726;
+}
+.featured-projects .sanctum-symbol {
+  font-size: 172px;
+  top: 41%;
+}
+.featured-projects .sanctum-orbit {
+  width: 370px;
+  height: 145px;
+  top: 43%;
+}
+.featured-projects .art-wordmark {
+  bottom: 65px;
+  font-size: 21px;
+  letter-spacing: 5px;
+}
+.featured-projects .art-fineprint {
+  bottom: 40px;
+  font-size: 8px;
+}
+.art-bubble {
+  background:
+    radial-gradient(ellipse at 25% 20%, #27768988, transparent 67%),
+    linear-gradient(145deg, #0b3044, #092030);
+}
+.featured-projects .music-widget {
+  inset: 84px 48px 63px;
+  padding: 30px;
+}
+.featured-projects .music-widget > span {
+  font-size: 8px;
+}
+.featured-projects .equalizer {
+  height: 118px;
+  gap: 6px;
+}
+.featured-projects .equalizer i {
+  width: 5px;
+}
+.featured-projects .music-widget strong {
+  font-size: 24px;
+}
+.featured-projects .b-one {
+  width: 125px;
+  height: 125px;
+  right: 25px;
+  top: 33px;
+}
+.featured-projects .b-two {
+  width: 76px;
+  height: 76px;
+  left: 30px;
+  bottom: 34px;
+}
+.art-ross {
+  background: linear-gradient(120deg, #343f3c, #182c30);
+}
+.featured-projects .ross-wordmark {
+  inset: 40px 45px;
+}
+.featured-projects .ross-wordmark strong {
+  font-size: 48px;
+}
+.featured-projects .ross-wordmark em {
+  font-size: 43px;
+}
+.wave-divider {
+  height: 210px;
+  margin-block: 0;
+  overflow: hidden;
+}
+.wave-divider svg {
+  width: 110%;
+  left: -5%;
+  filter: drop-shadow(0 0 7px #40b5df36);
+}
+.wave-line {
+  stroke: #7ddaf5;
+  stroke-width: 0.6;
+  opacity: calc(0.13 + var(--wave-index) * 0.035);
+  animation-duration: 9s;
+  animation-delay: calc(var(--wave-index) * -0.35s);
+}
+.wave-line:nth-child(even) {
+  stroke: #6c9cff;
+}
+.wave-line:nth-child(5n) {
+  stroke: #c6efff;
+  stroke-width: 1;
+}
+.wave-mass {
+  fill: #12698716;
+  animation: wave-drift 11s ease-in-out infinite;
+}
+.wave-mass-back {
+  fill: #145a9d14;
+  animation-delay: -4s;
+}
+.wave-label {
+  bottom: 6%;
+  background: transparent;
+  color: #aacbde;
+  font-size: 8px;
+  letter-spacing: 2.2px;
+}
+.ocean-manifesto {
+  text-align: center;
+  padding-top: 65px;
+  padding-bottom: 80px;
+}
+.ocean-manifesto .eyebrow {
+  justify-content: center;
+  margin-bottom: 28px;
+  gap: 15px;
+  font-size: 8px;
+}
+.ocean-manifesto h2 {
+  font-size: clamp(40px, 5.2vw, 74px);
+  line-height: 1.12;
+  margin-bottom: 28px;
+  letter-spacing: -0.055em;
+}
+.ocean-manifesto > p:last-child {
+  color: #a7bfcd;
+  font-size: 15px;
+  line-height: 1.9;
+}
+.about-section {
+  padding-top: 60px;
+  padding-bottom: 85px;
+  gap: 95px;
+}
+.about-portrait {
+  border-radius: 130px 130px 12px 12px;
+  padding: 10px;
+  background: #071e2c;
+  border-color: #6993a433;
+}
+.about-portrait img {
+  border-radius: 122px 122px 4px 4px;
+  filter: saturate(0.45);
+  aspect-ratio: 1/1.16;
+}
+.portrait-caption {
+  padding: 18px 9px 9px;
+  color: #bddae5;
+  font-size: 8px;
+  letter-spacing: 1.2px;
+}
+.portrait-stamp {
+  background: #a6e6f4;
+  color: #0a3041;
+  top: 35px;
+  box-shadow: 0 0 0 7px #030c16;
+}
+.about-copy h2 {
+  font-size: clamp(35px, 3.7vw, 54px);
+  line-height: 1.13;
+}
+.about-copy > p:not(.eyebrow) {
+  font-size: 15px;
+  line-height: 1.9;
+}
+.about-facts {
+  margin-top: 36px;
+}
+.about-facts strong {
+  font-size: 42px;
+}
+.about-facts div > span {
+  color: #a8c2d3;
+  font-size: 8px;
+}
+.experience-section {
+  padding-top: 50px;
+  padding-bottom: 110px;
+}
+.experience-section .section-heading {
+  margin-bottom: 53px;
+}
+.experience-row {
+  padding: 33px 0;
+  border-color: #80bee424;
+}
+.experience-row:last-child {
+  border-color: #80bee424;
+}
+.experience-row h3 {
+  font-size: 20px;
+}
+.experience-row > svg {
+  color: #8bd1f0;
+}
+.experience-tag {
+  color: #a1b7ca;
+}
+.contact-section {
+  width: 100%;
+  position: relative;
+  isolation: isolate;
+  padding: 145px 0 125px;
+  background: #041322;
+  overflow: hidden;
+  text-align: center;
+  border-top: 1px solid #8adaf51a;
+}
+.contact-seascape {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(
+      180deg,
+      #030c16 0%,
+      #030c16c7 22%,
+      #030c16a8 50%,
+      #030c16aa 80%,
+      #030c16 100%
+    ),
+    url("/images/cosmic-ocean.webp") center 76% / cover;
+}
+.contact-inner {
+  position: relative;
+}
+.contact-inner > .eyebrow {
+  justify-content: center;
+  font-size: 8px;
+  letter-spacing: 2px;
+  margin-bottom: 29px;
+  color: #b5d5e7;
+}
+.contact-section h2 {
+  font-size: clamp(60px, 8.5vw, 124px);
+  line-height: 1;
+  letter-spacing: -0.065em;
+  margin-bottom: 30px;
+}
+.contact-section h2 .tide-accent {
+  color: #a2dff7;
+}
+.contact-inner > p:not(.eyebrow) {
+  color: #b7ccda;
+  font-size: 14px;
+  line-height: 1.9;
+}
+.contact-actions {
+  margin-top: 32px;
+}
+.contact-email {
+  color: #bfd9e6;
+  font-size: 12px;
+}
+.contact-orbit {
+  display: none;
+}
+.site-footer {
+  padding-top: 0;
+}
+.footer-top {
+  border-color: #80bee424;
+  padding-block: 40px;
+}
+.footer-signature {
+  font-size: 29px;
+}
+.footer-bottom {
+  border-color: #80bee424;
+}
+.page-heading {
+  padding-top: 110px;
+  padding-bottom: 65px;
+}
+.page-heading h1 {
+  font-size: clamp(54px, 6.7vw, 96px);
+  line-height: 1.06;
+  letter-spacing: -0.055em;
+}
+.page-heading > p:not(.eyebrow) {
+  color: #b0c7d7;
+}
+.social-card,
+.interest-tile {
+  border-radius: 12px;
+  border-color: #83b9d331;
+  background: linear-gradient(135deg, #102e4140, #041321);
+}
+.social-card:hover {
+  background: #12344855;
+  border-color: #91d0f180;
+}
+.social-card strong {
+  color: #91d7f1;
+}
+.social-symbol {
+  color: #a2e7fc;
+  border-color: #91d0f150;
+}
+.filter-button[aria-pressed="true"] {
+  background: #a2e7fc;
+  color: #062133;
+}
+.skill-list > span {
+  border-color: #8ed5f236;
+  color: #bbd7e7;
+}
+/* No decorative motion runs when the visitor chooses a still view. */
+html[data-motion="paused"] .ocean-canvas {
+  opacity: 0;
+}
+@media (min-width: 1700px) {
+  .ocean-hero-content {
+    padding-top: 190px;
+  }
+  .ocean-hero {
+    min-height: 1030px;
+  }
+}
+@media (max-width: 1100px) {
+  .ocean-hero {
+    min-height: 900px;
+  }
+  .ocean-hero-content {
+    padding-top: 175px;
+  }
+  .ocean-hero h1 {
+    font-size: 105px;
+  }
+  .hero-depth-marker {
+    right: 16px;
+  }
+  .hero-kicker {
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+  .featured-projects .project-art {
+    height: 325px;
+  }
+  .featured-projects .sanctum-orbit {
+    width: 300px;
+    height: 125px;
+  }
+  .featured-projects .sanctum-symbol {
+    font-size: 140px;
+  }
+  .featured-projects .music-widget {
+    inset: 65px 25px 50px;
+    padding: 23px;
+  }
+  .featured-projects .equalizer {
+    height: 102px;
+    gap: 4px;
+  }
+  .featured-projects .music-widget strong {
+    font-size: 21px;
+  }
+  .featured-projects .project-card:last-child .project-info {
+    padding: 15px;
+  }
+  .about-section {
+    gap: 65px;
+  }
+  .about-copy > p:not(.eyebrow) {
+    font-size: 14px;
+  }
+  .expertise-strip {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+  }
+  .nav-links {
+    gap: 24px;
+  }
+}
+@media (max-width: 800px) {
+  .navigation {
+    height: 88px;
+  }
+  .brand {
+    font-size: 11px;
+  }
+  .brand-sub {
+    font-size: 6px;
+  }
+  .nav-links {
+    font-size: 11px;
+    gap: 20px;
+  }
+  .nav-links .nav-contact {
+    padding: 9px 15px;
+  }
+  .ocean-hero {
+    min-height: 860px;
+  }
+  .ocean-hero-content {
+    padding-top: 170px;
+  }
+  .ocean-hero h1 {
+    font-size: 85px;
+  }
+  .hero-kicker {
+    font-size: 7px;
+    letter-spacing: 1.3px;
+    gap: 12px;
+  }
+  .hero-kicker > span {
+    width: 22px;
+  }
+  .ocean-intro {
+    font-size: 14px;
+  }
+  .ocean-location {
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+  .hero-depth-marker {
+    display: none;
+  }
+  .section-heading h2 {
+    font-size: 43px;
+  }
+  .section-heading-aside > p {
+    font-size: 11px;
+  }
+  .section-heading-aside .text-link {
+    font-size: 11px;
+    gap: 12px;
+  }
+  .featured-projects {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 23px;
+  }
+  .featured-projects .project-art {
+    height: 295px;
+  }
+  .featured-projects .sanctum-symbol {
+    font-size: 125px;
+  }
+  .featured-projects .sanctum-orbit {
+    width: 240px;
+    height: 100px;
+  }
+  .featured-projects .art-wordmark {
+    font-size: 13px;
+    letter-spacing: 3px;
+    bottom: 55px;
+  }
+  .featured-projects .art-fineprint {
+    font-size: 6px;
+    bottom: 35px;
+  }
+  .featured-projects .music-widget {
+    inset: 65px 19px 50px;
+    padding: 17px;
+  }
+  .featured-projects .music-widget strong {
+    font-size: 18px;
+  }
+  .featured-projects .equalizer {
+    height: 95px;
+    gap: 3px;
+  }
+  .featured-projects .project-card:last-child {
+    padding: 18px;
+    gap: 23px;
+  }
+  .featured-projects .project-card:last-child .project-art {
+    height: 260px;
+  }
+  .featured-projects .project-card:last-child .project-info {
+    padding: 0;
+  }
+  .featured-projects .project-info h3 {
+    font-size: 24px;
+  }
+  .featured-projects .project-info p {
+    font-size: 13px;
+  }
+  .featured-projects .project-meta {
+    font-size: 8px;
+  }
+  .featured-projects .project-meta > div > span {
+    font-size: 7px;
+    padding: 2px 5px;
+  }
+  .featured-projects .ross-wordmark {
+    inset: 35px 23px;
+  }
+  .featured-projects .ross-wordmark strong {
+    font-size: 38px;
+  }
+  .featured-projects .ross-wordmark em {
+    font-size: 35px;
+  }
+  .ocean-manifesto {
+    padding-block: 45px 60px;
+  }
+  .ocean-manifesto h2 {
+    font-size: 48px;
+  }
+  .about-section {
+    gap: 40px;
+  }
+  .about-copy h2 {
+    font-size: 37px;
+  }
+  .about-copy > p:not(.eyebrow) {
+    font-size: 13px;
+  }
+  .about-facts strong {
+    font-size: 35px;
+  }
+  .about-facts div > span {
+    font-size: 7px;
+  }
+  .contact-section {
+    padding-block: 115px;
+  }
+  .contact-section h2 {
+    font-size: 89px;
+  }
+  .page-heading {
+    padding-top: 85px;
+  }
+  .wave-divider {
+    height: 175px;
+  }
+  .expertise-strip {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+}
+@media (max-width: 600px) {
+  .navigation {
+    height: 80px;
+  }
+  .brand {
+    font-size: 11px;
+    letter-spacing: 1.3px;
+  }
+  .brand-sub {
+    font-size: 5.8px;
+  }
+  .ocean-home .site-header {
+    padding-bottom: 65px;
+    background: #020b1770;
+  }
+  .js .ocean-home .site-header {
+    padding-bottom: 0;
+    background: transparent;
+  }
+  .js .nav-links {
+    top: 80px;
+    background: #061625f5;
+    backdrop-filter: blur(20px);
+  }
+  .nav-links {
+    font-size: 11px;
+  }
+  .nav-links .nav-contact {
+    padding: 8px 12px;
+  }
+  .ocean-hero {
+    height: 900px;
+    min-height: 900px;
+    max-height: none;
+  }
+  .ocean-hero-content {
+    padding-top: 169px;
+    width: calc(100% - 28px);
+  }
+  .hero-kicker {
+    font-size: 6px;
+    letter-spacing: 1.25px;
+    gap: 7px;
+    white-space: nowrap;
+    margin-bottom: 29px;
+  }
+  .hero-kicker > span {
+    width: 9px;
+    flex-shrink: 0;
+  }
+  .ocean-hero h1 {
+    font-size: clamp(46px, 11.5vw, 69px);
+    line-height: 1;
+    letter-spacing: -0.062em;
+    margin-bottom: 23px;
+  }
+  .ocean-hero h1 > span:first-child {
+    font-size: 1.4em;
+    line-height: 1.05;
+  }
+  .ocean-hero h1 .hero-title-depth {
+    padding-bottom: 5px;
+  }
+  .ocean-intro {
+    font-size: 13px;
+    line-height: 1.9;
+    max-width: 290px;
+    margin-bottom: 25px;
+  }
+  .ocean-intro .desktop-break {
+    display: none;
+  }
+  .ocean-actions {
+    gap: 9px;
+  }
+  .ocean-actions .button {
+    min-height: 49px;
+    padding: 11px 16px;
+    font-size: 11px;
+    gap: 13px;
+  }
+  .ocean-actions .button svg {
+    width: 15px;
+  }
+  .ocean-hero-rail {
+    bottom: 29px;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  .ocean-location {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    font-size: 6px;
+    letter-spacing: 1.1px;
+    margin-top: 13px;
+  }
+  .ocean-scroll {
+    font-size: 7px;
+    gap: 10px;
+  }
+  .scroll-circle {
+    width: 37px;
+    height: 37px;
+    font-size: 20px;
+  }
+  .hyperspace-button {
+    font-size: 9px;
+    padding: 9px 12px;
+    gap: 7px;
+  }
+  .ocean-image {
+    object-position: 50% 50%;
+  }
+  .ocean-vignette {
+    background:
+      linear-gradient(
+        180deg,
+        #030b163b,
+        #030b1610 18%,
+        #030b1655 44%,
+        transparent 65%,
+        #030c16a3 88%,
+        #030c16 100%
+      ),
+      radial-gradient(ellipse 80% 22% at 50% 35%, #03132388, transparent 95%);
+  }
+  .expertise-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 8px;
+    letter-spacing: 1.7px;
+    gap: 18px;
+    padding-block: 27px;
+  }
+  .expertise-strip > svg {
+    display: none;
+  }
+  .selected-work {
+    padding-top: 70px;
+    padding-bottom: 40px;
+  }
+  .selected-work .section-heading {
+    display: block;
+    margin-bottom: 30px;
+  }
+  .section-number {
+    font-size: 8px;
+    letter-spacing: 1.6px;
+  }
+  .section-heading h2 {
+    font-size: 37px;
+    line-height: 1.12;
+  }
+  .section-heading-aside {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 23px;
+    align-items: flex-end;
+  }
+  .section-heading-aside > p {
+    font-size: 10px;
+    margin: 0;
+  }
+  .section-heading-aside .text-link {
+    font-size: 10px;
+    gap: 10px;
+    line-height: 2.6;
+  }
+  .featured-projects {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .featured-projects .project-art {
+    height: 310px;
+  }
+  .featured-projects .project-card:last-child {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+    grid-column: auto;
+  }
+  .featured-projects .project-card:last-child .project-art {
+    height: 290px;
+  }
+  .featured-projects .project-card:last-child .project-info,
+  .featured-projects .project-info {
+    padding: 20px 1px 0;
+  }
+  .featured-projects .project-info h3 {
+    font-size: 25px;
+  }
+  .featured-projects .project-info p {
+    font-size: 13px;
+  }
+  .featured-projects .project-meta {
+    font-size: 9px;
+  }
+  .featured-projects .project-meta > div > span {
+    font-size: 7px;
+    padding: 3px 7px;
+  }
+  .featured-projects .sanctum-symbol {
+    font-size: 142px;
+    top: 39%;
+  }
+  .featured-projects .sanctum-orbit {
+    width: 280px;
+    height: 115px;
+    top: 41%;
+  }
+  .featured-projects .art-wordmark {
+    font-size: 16px;
+    letter-spacing: 3px;
+  }
+  .featured-projects .art-fineprint {
+    font-size: 7px;
+  }
+  .featured-projects .music-widget {
+    inset: 68px 33px 49px;
+    padding: 20px;
+  }
+  .featured-projects .equalizer {
+    height: 95px;
+    gap: 4px;
+  }
+  .featured-projects .music-widget strong {
+    font-size: 22px;
+  }
+  .featured-projects .ross-wordmark {
+    inset: 40px 32px;
+  }
+  .featured-projects .ross-wordmark strong {
+    font-size: 48px;
+  }
+  .featured-projects .ross-wordmark em {
+    font-size: 43px;
+  }
+  .wave-divider {
+    height: 145px;
+  }
+  .wave-line {
+    stroke-width: 0.75;
+  }
+  .wave-label {
+    font-size: 6px;
+    letter-spacing: 1.4px;
+    bottom: 0;
+  }
+  .ocean-manifesto {
+    padding-top: 55px;
+    padding-bottom: 40px;
+  }
+  .ocean-manifesto .eyebrow {
+    font-size: 6px;
+    letter-spacing: 1px;
+    gap: 10px;
+    margin-bottom: 25px;
+  }
+  .ocean-manifesto .eyebrow svg {
+    width: 17px;
+  }
+  .ocean-manifesto h2 {
+    font-size: 35px;
+    line-height: 1.15;
+    margin-bottom: 23px;
+  }
+  .ocean-manifesto > p:last-child {
+    font-size: 13px;
+    max-width: 290px;
+    margin-inline: auto;
+  }
+  .about-section {
+    padding-top: 30px;
+    padding-bottom: 35px;
+    gap: 40px;
+  }
+  .about-portrait {
+    max-width: 340px;
+    margin-inline: 12px;
+    border-radius: 110px 110px 12px 12px;
+  }
+  .about-portrait img {
+    border-radius: 100px 100px 4px 4px;
+    aspect-ratio: 1/1.08;
+  }
+  .portrait-stamp {
+    top: 24px;
+    right: -16px;
+    width: 73px;
+    height: 73px;
+    font-size: 9px;
+  }
+  .portrait-caption {
+    font-size: 6px;
+    padding-inline: 3px;
+  }
+  .about-copy h2 {
+    font-size: 40px;
+  }
+  .about-copy > p:not(.eyebrow) {
+    font-size: 14px;
+  }
+  .about-copy > .text-link {
+    font-size: 12px;
+    gap: 17px;
+  }
+  .about-facts {
+    margin-top: 32px;
+    padding-top: 25px;
+  }
+  .about-facts strong {
+    font-size: 38px;
+  }
+  .about-facts div > span {
+    font-size: 7px;
+  }
+  .experience-section {
+    padding-top: 30px;
+    padding-bottom: 55px;
+  }
+  .experience-section .section-heading {
+    margin-bottom: 30px;
+  }
+  .experience-row {
+    padding: 26px 0;
+    gap: 12px;
+  }
+  .experience-row h3 {
+    font-size: 19px;
+  }
+  .experience-row p {
+    font-size: 13px;
+  }
+  .contact-section {
+    padding-block: 95px 90px;
+  }
+  .contact-inner > .eyebrow {
+    font-size: 6px;
+    letter-spacing: 1.1px;
+    gap: 8px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+  }
+  .contact-section h2 {
+    font-size: 65px;
+    line-height: 1.02;
+    margin-bottom: 26px;
+  }
+  .contact-inner > p:not(.eyebrow) {
+    font-size: 12px;
+    max-width: 300px;
+    margin-inline: auto;
+  }
+  .contact-actions {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .contact-email {
+    font-size: 11px;
+  }
+  .contact-seascape {
+    background-position: 50% 100%;
+    background-size: auto 100%;
+  }
+  .footer-top {
+    padding-block: 30px;
+  }
+  .footer-signature {
+    font-size: 23px;
+  }
+  .footer-top p {
+    font-size: 9px;
+  }
+  .footer-bottom {
+    font-size: 8px;
+  }
+  .page-heading {
+    padding-top: 65px;
+    padding-bottom: 40px;
+  }
+  .page-heading h1 {
+    font-size: 48px;
+    line-height: 1.09;
+  }
+  .page-heading > p:not(.eyebrow) {
+    font-size: 14px;
+  }
+  .social-card h2 {
+    font-size: 27px;
+  }
+  .interest-feature h2 {
+    font-size: 36px;
+  }
+  .resume-entry h3 {
+    font-size: 24px;
+  }
+}
+@media (max-width: 360px) {
+  .hero-kicker {
+    font-size: 5px;
+    letter-spacing: 1px;
+  }
+  .ocean-actions .button {
+    font-size: 10px;
+    padding-inline: 13px;
+    gap: 10px;
+  }
+  .ocean-hero {
+    min-height: 850px;
+    height: 850px;
+  }
+  .ocean-hero-content {
+    padding-top: 160px;
+  }
+  .contact-section h2 {
+    font-size: 58px;
+  }
+  .section-heading h2 {
+    font-size: 32px;
+  }
+  .section-heading-aside > p {
+    font-size: 9px;
+  }
+  .section-heading-aside .text-link {
+    font-size: 9px;
+    gap: 5px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ocean-canvas {
+    display: none !important;
+  }
+  .wave-mass {
+    animation: none;
+  }
+}
+@media print {
+  body {
+    background: white;
+  }
+  .tide-accent {
+    color: #333;
+  }
+  .ocean-scene,
+  .ocean-current-band,
+  .hero-depth-marker {
+    display: none;
+  }
+  .page-heading h1 {
+    font-size: 32pt;
+  }
+  .contact-section {
+    display: none;
+  }
+}

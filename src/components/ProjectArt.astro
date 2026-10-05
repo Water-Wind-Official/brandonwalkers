@@ -1,0 +1,68 @@
+---
+interface Props {
+  art: string;
+  title: string;
+}
+const { art, title } = Astro.props;
+---
+
+<div class:list={["project-art", `art-${art}`]} aria-hidden="true">
+  <div class="art-grid"></div>
+  {art === "sanctum" ? (
+    <>
+      <div class="sanctum-orbit"></div>
+      <div class="sanctum-symbol">
+        S<span>✦</span>
+      </div>
+      <span class="art-wordmark">SANCTUM NETWORK</span>
+      <span class="art-fineprint">A HOME FOR DIGITAL THINGS</span>
+    </>
+  ) : art === "bubble" ? (
+    <>
+      <div class="bubble b-one"></div>
+      <div class="bubble b-two"></div>
+      <div class="bubble b-three"></div>
+      <div class="music-widget">
+        <span>FEEL THE FREQUENCY</span>
+        <div class="equalizer">
+          {Array.from({ length: 23 }, (_, i) => (
+            <i
+              style={`--bar-height:${15 + ((i * 37) % 65)}%;--bar-delay:${i * -0.13}s`}
+            ></i>
+          ))}
+        </div>
+        <strong>
+          Bubble Float <span>↗</span>
+        </strong>
+      </div>
+    </>
+  ) : art === "ross" ? (
+    <>
+      <div class="cabinet-lines">
+        <i></i>
+        <i></i>
+        <i></i>
+      </div>
+      <div class="ross-wordmark">
+        <span>CRAFTED WITH CARE</span>
+        <strong>
+          Ross Creek
+          <br />
+          <em>Cabinets</em>
+        </strong>
+        <span>WAYCROSS, GEORGIA</span>
+      </div>
+    </>
+  ) : (
+    <>
+      <div class="world-orb"></div>
+      <div class="world-horizon"></div>
+      <span class="art-world-title">{title}</span>
+      <span class="art-fineprint">
+        {["music"].includes(art)
+          ? "MAKE ROOM FOR MUSIC"
+          : "ANOTHER WORLD AWAITS"}
+      </span>
+    </>
+  )}
+</div>

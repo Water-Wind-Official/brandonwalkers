@@ -1,0 +1,48 @@
+---
+import Icon from "./Icon.astro";
+import ProjectArt from "./ProjectArt.astro";
+import type { Project } from "../data/portfolio";
+interface Props {
+  project: Project;
+  index: number;
+}
+const { project, index } = Astro.props;
+---
+
+<article
+  class="project-card"
+  data-category={project.category}
+  data-search={`${project.title} ${project.description} ${project.tags.join(" ")}`.toLowerCase()}
+>
+  <a
+    class="project-art-link"
+    href={project.href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`${project.action}: ${project.title} (opens in a new tab)`}
+  >
+    <ProjectArt art={project.art} title={project.title} />
+    <span class="project-open">
+      <Icon name="diagonal" />
+    </span>
+  </a>
+  <div class="project-info">
+    <div class="project-meta">
+      <span>
+        {project.category} / {String(index + 1).padStart(2, "0")}
+      </span>
+      <div>
+        {project.tags.slice(0, 2).map((tag) => (
+          <span>{tag}</span>
+        ))}
+      </div>
+    </div>
+    <h3>
+      <a href={project.href} target="_blank" rel="noopener noreferrer">
+        {project.title}
+        <Icon name="diagonal" size={21} />
+      </a>
+    </h3>
+    <p>{project.description}</p>
+  </div>
+</article>

@@ -1,0 +1,28 @@
+---
+interface Props {
+  flip?: boolean;
+  label?: string;
+}
+const { flip = false, label = "" } = Astro.props;
+---
+
+<div class:list={["wave-divider", { "wave-flip": flip }]} aria-hidden="true">
+  <svg viewBox="0 0 1440 220" fill="none" preserveAspectRatio="none">
+    <path
+      class="wave-mass wave-mass-back"
+      d="M-100 170 C200 210 280 10 630 85 S1100 230 1540 40 L1540 180 C1080 290 910 140 610 125 S220 270 -100 230Z"
+    />
+    <path
+      class="wave-mass"
+      d="M-100 200 C220 215 290 50 620 105 S1090 200 1540 65 L1540 160 C1100 260 900 150 605 130 S210 250 -100 240Z"
+    />
+    {Array.from({ length: 14 }, (_, i) => (
+      <path
+        class="wave-line"
+        style={`--wave-index:${i}`}
+        d={`M-100 ${160 + i * 5} C200 ${225 + i * 2} 300 ${20 + i * 7} 630 ${80 + i * 4} S1100 ${235 - i * 3} 1540 ${35 + i * 8}`}
+      />
+    ))}
+  </svg>
+  {label && <span class="wave-label">{label}</span>}
+</div>

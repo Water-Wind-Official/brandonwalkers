@@ -1,0 +1,117 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Icon from "../components/Icon.astro";
+import { RESUME_URL } from "../consts";
+---
+
+<SiteLayout
+  title="Résumé & experience — Brandon Walker"
+  description="Brandon Walker’s experience in quality assurance, team leadership, and digital development, with education and a downloadable résumé."
+>
+  <section class="page-heading container">
+    <p class="eyebrow">03 / EXPERIENCE & EDUCATION</p>
+    <h1>
+      People. Technology.
+      <br />
+      <span class="tide-accent">A little perspective.</span>
+    </h1>
+    <p>
+      A background in quality assurance and hands-on leadership. A future in
+      creating thoughtful digital experiences.
+    </p>
+  </section>
+  <div class="page-section container resume-layout">
+    <aside class="resume-aside">
+      <h2>Brandon Walker</h2>
+      <p>
+        Information Technology
+        <br />
+        Digital UX & web development
+      </p>
+      <a href="mailto:blwaterwind@gmail.com">blwaterwind@gmail.com</a>
+      <a href="tel:+19127228884">(912) 722-8884</a>
+      <p style="margin-top:20px">
+        Open to opportunities
+        <br />
+        anywhere in the US.
+      </p>
+      <a href={RESUME_URL} download class="button button-mint">
+        Download PDF <Icon name="down" size={16} />
+      </a>
+    </aside>
+    <div>
+      <section class="resume-group" aria-labelledby="work-history">
+        <h2 id="work-history">Work history</h2>
+        <article class="resume-entry">
+          <h3>Quality Assurance Specialist</h3>
+          <div class="entry-meta">
+            <span>TELUS Digital</span>
+            <span>February 2024 — Present</span>
+          </div>
+          <p>
+            Quality assurance work alongside ongoing studies in Information
+            Technology and digital UX.
+          </p>
+        </article>
+        <article class="resume-entry">
+          <h3>Assistant Store Manager</h3>
+          <div class="entry-meta">
+            <span>Zoner’s Pizza</span>
+            <span>July 2020 — March 2025</span>
+          </div>
+          <ul>
+            <li>Trained and managed a team of 14+ crew members.</li>
+            <li>Prepared inventory spreadsheet reports.</li>
+            <li>Managed high-volume shifts and fast-paced production.</li>
+          </ul>
+        </article>
+      </section>
+      <section class="resume-group" aria-labelledby="education">
+        <h2 id="education">Education</h2>
+        <article class="resume-entry">
+          <h3>Bachelor’s in Information Technology</h3>
+          <div class="entry-meta">
+            <span>Middle Georgia State University</span>
+            <span>March 2024 — Present</span>
+          </div>
+          <ul>
+            <li>Third-year student with 100+ credits completed.</li>
+            <li>Specializing in digital UX.</li>
+            <li>Degree in progress.</li>
+          </ul>
+        </article>
+        <article class="resume-entry">
+          <h3>High School Diploma</h3>
+          <div class="entry-meta">
+            <span>Pierce County High School</span>
+            <span>2012 — 2015</span>
+          </div>
+          <p>Microsoft Word and Microsoft PowerPoint certified.</p>
+        </article>
+      </section>
+      <section class="resume-group" aria-labelledby="skills">
+        <h2 id="skills">Skills & strengths</h2>
+        <div class="skill-list">
+          <span>Python</span>
+          <span>HTML / CSS</span>
+          <span>Cloudflare deployment</span>
+          <span>Digital UX</span>
+          <span>Project management</span>
+          <span>Customer service</span>
+          <span>Team leadership</span>
+          <span>Quality assurance</span>
+        </div>
+      </section>
+      <section class="resume-group" aria-labelledby="interests">
+        <h2 id="interests">Interests</h2>
+        <p class="section-intro">
+          Digital development, metropolitan areas, relocation, and conservation
+          of nature.
+        </p>
+        <a class="text-link" href="/work">
+          See what I’m building <Icon name="diagonal" size={17} />
+        </a>
+      </section>
+    </div>
+  </div>
+</SiteLayout>

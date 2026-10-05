@@ -1,0 +1,74 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Icon from "../components/Icon.astro";
+import WaveDivider from "../components/WaveDivider.astro";
+import ContactSection from "../components/ContactSection.astro";
+import { projects } from "../data/portfolio";
+---
+
+<SiteLayout
+  title="Work — Brandon Walker"
+  description="Explore Brandon Walker’s websites, Android apps, Minecraft modpacks, and interactive worlds."
+>
+  <section class="page-heading container">
+    <p class="eyebrow">01 / THE CREATIVE UNIVERSE</p>
+    <h1>
+      Curiosity takes
+      <br />
+      <span class="tide-accent">many forms.</span>
+    </h1>
+    <p>
+      Websites that connect. Apps that move. Worlds that invite you in. Here’s
+      what I’ve been putting into the world.
+    </p>
+  </section>
+  <section class="page-section container" aria-label="Project collection">
+    <div class="filter-bar" hidden>
+      <div
+        class="filter-buttons"
+        role="group"
+        aria-label="Filter by project type"
+      >
+        {["All", "Web", "Apps", "Worlds"].map((category) => (
+          <button
+            class="filter-button"
+            data-filter={category}
+            aria-pressed={category === "All"}
+          >
+            {category === "All" ? "All work" : category}
+          </button>
+        ))}
+      </div>
+      <label class="project-search">
+        <Icon name="search" size={16} />
+        <span class="sr-only">Search projects</span>
+        <input
+          id="project-search"
+          type="search"
+          placeholder="Find something interesting…"
+          autocomplete="off"
+        />
+      </label>
+    </div>
+    <p class="project-count" role="status" aria-live="polite">
+      {projects.length} projects across the creative universe
+    </p>
+    <div class="project-grid all-projects" data-project-grid>
+      {projects.map((project, index) => (
+        <ProjectCard project={project} index={index} />
+      ))}
+    </div>
+    <div class="empty-state" hidden>
+      <h2>An undiscovered corner.</h2>
+      <p>
+        No projects match that search. Try another word or explore all my work.
+      </p>
+      <button class="button button-outline reset-filters">
+        Show all projects <Icon name="arrow" size={17} />
+      </button>
+    </div>
+  </section>
+  <WaveDivider />
+  <ContactSection />
+</SiteLayout>

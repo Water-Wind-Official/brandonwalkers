@@ -1,907 +1,239 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Icon from "../components/Icon.astro";
+import OceanScene from "../components/OceanScene.astro";
+import WaveDivider from "../components/WaveDivider.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import ContactSection from "../components/ContactSection.astro";
+import { projects } from "../data/portfolio";
+import { RESUME_URL } from "../consts";
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Brandon Walker | Portfolio</title>
-		<meta name="description" content="Portfolio and resume of Brandon Walker — web developer, information systems professional, and service operations leader." />
-		<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-		<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" crossorigin="anonymous" async id="particles-script" onerror="console.error('Failed to load particles.js')"></script>
-		<style>
-		  :root {
-		    --bg-deep: #050816;
-		    --bg-mid: #0b1220;
-		    --panel: rgba(15, 23, 42, 0.74);
-		    --panel-strong: rgba(30, 27, 75, 0.86);
-		    --line: rgba(148, 163, 184, 0.25);
-		    --text: #e2e8f0;
-		    --muted: #cbd5e1;
-		    --soft: #94a3b8;
-		    --purple: #8b5cf6;
-		    --violet: #a78bfa;
-		    --cyan: #67e8f9;
-		    --shadow: rgba(15, 23, 42, 0.52);
-		  }
-
-		  html {
-		    scroll-behavior: smooth;
-		  }
-
-		  body {
-		    margin: 0;
-		    background: radial-gradient(circle at top, rgba(139, 92, 246, 0.18), transparent 32%), linear-gradient(135deg, #070b17 0%, #111827 44%, #020817 100%);
-		    color: var(--text);
-		    font-family: 'Inter', sans-serif;
-		    line-height: 1.7;
-		    overflow-x: hidden;
-		    position: relative;
-		  }
-
-		  a {
-		    color: inherit;
-		  }
-
-		  #particles-js {
-		    position: fixed;
-		    inset: 0;
-		    width: 100%;
-		    height: 100%;
-		    z-index: 0;
-		    background: transparent;
-		    pointer-events: none;
-		    opacity: 0.9;
-		  }
-
-		  .site-shell {
-		    position: relative;
-		    z-index: 1;
-		  }
-
-		  main {
-		    width: 100%;
-		    max-width: none;
-		    margin: 0;
-		    padding: 0;
-		  }
-
-		  .section-shell {
-		    max-width: 1200px;
-		    margin: 0 auto;
-		    padding: 0 1.25rem;
-		  }
-
-		  .hero {
-		    min-height: 82vh;
-		    display: grid;
-		    grid-template-columns: 1.35fr 0.8fr;
-		    align-items: center;
-		    gap: 2rem;
-		    max-width: 1200px;
-		    margin: 0 auto;
-		    padding: 5rem 1.25rem 4rem;
-		  }
-
-		  .eyebrow {
-		    display: inline-flex;
-		    align-items: center;
-		    gap: 0.5rem;
-		    padding: 0.45rem 0.9rem;
-		    border-radius: 999px;
-		    border: 1px solid rgba(167, 139, 250, 0.4);
-		    background: rgba(91, 33, 182, 0.2);
-		    color: var(--violet);
-		    font-size: 0.78rem;
-		    letter-spacing: 0.12em;
-		    text-transform: uppercase;
-		    font-weight: 700;
-		  }
-
-		  .hero-copy h1 {
-		    margin: 1.1rem 0 1rem;
-		    font-family: 'Playfair Display', serif;
-		    font-size: clamp(3.2rem, 6vw, 6rem);
-		    line-height: 0.96;
-		    letter-spacing: -0.06em;
-		    color: #f8fafc;
-		  }
-
-		  .hero-copy .accent {
-		    color: var(--cyan);
-		    text-shadow: 0 0 18px rgba(103, 232, 249, 0.35);
-		  }
-
-		  .hero-copy p {
-		    margin: 0;
-		    max-width: 650px;
-		    color: var(--muted);
-		    font-size: 1.08rem;
-		  }
-
-		  .cta-row {
-		    display: flex;
-		    flex-wrap: wrap;
-		    gap: 1rem;
-		    margin-top: 2rem;
-		  }
-
-		  .button {
-		    display: inline-flex;
-		    align-items: center;
-		    justify-content: center;
-		    padding: 0.9rem 1.45rem;
-		    border-radius: 9999px;
-		    text-decoration: none;
-		    font-weight: 700;
-		    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-		    border: 1px solid transparent;
-		  }
-
-		  .button:hover,
-		  .button:focus-visible {
-		    transform: translateY(-1px);
-		  }
-
-		  .button.primary {
-		    background: linear-gradient(135deg, var(--purple), #4f46e5);
-		    box-shadow: 0 18px 40px rgba(139, 92, 246, 0.35);
-		    color: white;
-		  }
-
-		  .button.secondary {
-		    background: rgba(15, 23, 42, 0.45);
-		    border-color: rgba(148, 163, 184, 0.35);
-		    color: var(--text);
-		  }
-
-		  .mini-stats {
-		    display: grid;
-		    grid-template-columns: repeat(3, minmax(0, 1fr));
-		    gap: 1rem;
-		    margin-top: 2.5rem;
-		    list-style: none;
-		    padding: 0;
-		  }
-
-		  .mini-stats li {
-		    padding: 1rem 1rem 0.9rem;
-		    background: rgba(15, 23, 42, 0.5);
-		    border: 1px solid var(--line);
-		    border-radius: 1rem;
-		    backdrop-filter: blur(8px);
-		  }
-
-		  .mini-stats strong {
-		    display: block;
-		    font-size: 1.5rem;
-		    color: #f8fafc;
-		    line-height: 1.1;
-		  }
-
-		  .mini-stats span {
-		    color: var(--soft);
-		    font-size: 0.82rem;
-		    text-transform: uppercase;
-		    letter-spacing: 0.08em;
-		  }
-
-		  .hero-panel {
-		    display: flex;
-		    justify-content: center;
-		  }
-
-		  .panel-card {
-		    width: min(100%, 420px);
-		    padding: 1.5rem;
-		    border-radius: 1.5rem;
-		    background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(17, 24, 39, 0.7));
-		    border: 1px solid rgba(148, 163, 184, 0.18);
-		    box-shadow: 0 22px 48px rgba(15, 23, 42, 0.7);
-		  }
-
-		  .panel-card .status {
-		    display: inline-block;
-		    color: var(--cyan);
-		    font-size: 0.72rem;
-		    letter-spacing: 0.12em;
-		    text-transform: uppercase;
-		    margin-bottom: 0.9rem;
-		  }
-
-		  .panel-card h2 {
-		    margin: 0 0 0.8rem;
-		    font-size: 1.6rem;
-		    color: white;
-		  }
-
-		  .panel-card p {
-		    margin: 0;
-		    color: var(--muted);
-		  }
-
-		  .panel-card ul {
-		    margin: 1.25rem 0 0;
-		    padding-left: 1.1rem;
-		    color: var(--muted);
-		    line-height: 1.9;
-		  }
-
-		  .content-section {
-		    padding: 5.5rem 0;
-		    opacity: 0;
-		    transform: translateY(18px);
-		    transition: opacity 0.7s ease, transform 0.7s ease;
-		  }
-
-		  .content-section.visible {
-		    opacity: 1;
-		    transform: translateY(0);
-		  }
-
-		  .section-header {
-		    margin-bottom: 2rem;
-		  }
-
-		  .section-title {
-		    margin: 0 0 0.75rem;
-		    font-family: 'Playfair Display', serif;
-		    font-size: clamp(2.3rem, 4vw, 3.4rem);
-		    color: #f8fafc;
-		  }
-
-		  .section-header p {
-		    margin: 0;
-		    color: var(--soft);
-		    max-width: 680px;
-		  }
-
-		  .project-grid,
-		  .feature-grid,
-		  .timeline,
-		  .resume-grid,
-		  .cert-grid {
-		    display: grid;
-		    gap: 1.5rem;
-		  }
-
-		  .project-grid {
-		    grid-template-columns: repeat(3, minmax(0, 1fr));
-		  }
-
-		  .feature-grid {
-		    grid-template-columns: repeat(3, minmax(0, 1fr));
-		  }
-
-		  .card,
-		  .feature,
-		  .resume-panel,
-		  .cert-item {
-		    background: rgba(15, 23, 42, 0.7);
-		    border: 1px solid var(--line);
-		    border-radius: 1.35rem;
-		    padding: 1.5rem;
-		    backdrop-filter: blur(10px);
-		    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.28);
-		  }
-
-		  .project-card {
-		    display: flex;
-		    flex-direction: column;
-		    height: 100%;
-		    min-height: 320px;
-		  }
-
-		  .project-badge {
-		    display: inline-flex;
-		    align-self: flex-start;
-		    padding: 0.36rem 0.72rem;
-		    border-radius: 999px;
-		    background: rgba(103, 232, 249, 0.1);
-		    border: 1px solid rgba(103, 232, 249, 0.2);
-		    color: var(--cyan);
-		    font-size: 0.72rem;
-		    letter-spacing: 0.08em;
-		    text-transform: uppercase;
-		    font-weight: 700;
-		    margin-bottom: 0.9rem;
-		  }
-
-		  .project-card h3,
-		  .feature h3,
-		  .resume-panel h3 {
-		    margin: 0 0 0.7rem;
-		    font-size: 1.45rem;
-		    color: #f8fafc;
-		  }
-
-		  .project-card p,
-		  .feature p,
-		  .resume-panel p,
-		  .cert-item li,
-		  .resume-panel li {
-		    color: var(--muted);
-		  }
-
-		  .tag-row {
-		    display: flex;
-		    flex-wrap: wrap;
-		    gap: 0.55rem;
-		    margin-top: 1rem;
-		  }
-
-		  .tag {
-		    display: inline-block;
-		    padding: 0.36rem 0.7rem;
-		    border-radius: 999px;
-		    background: rgba(139, 92, 246, 0.12);
-		    border: 1px solid rgba(139, 92, 246, 0.22);
-		    color: #ddd6fe;
-		    font-size: 0.74rem;
-		  }
-
-		  .project-link {
-		    margin-top: auto;
-		    display: inline-flex;
-		    align-items: center;
-		    gap: 0.4rem;
-		    color: var(--cyan);
-		    text-decoration: none;
-		    font-weight: 600;
-		    padding-top: 1rem;
-		  }
-
-		  .feature-grid {
-		    grid-template-columns: repeat(3, minmax(0, 1fr));
-		  }
-
-		  .feature-icon {
-		    width: 2.8rem;
-		    height: 2.8rem;
-		    display: grid;
-		    place-items: center;
-		    border-radius: 0.9rem;
-		    background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(103, 232, 249, 0.12));
-		    border: 1px solid rgba(139, 92, 246, 0.24);
-		    font-size: 1.3rem;
-		    margin-bottom: 1rem;
-		  }
-
-		  .timeline {
-		    grid-template-columns: 1fr 1fr;
-		  }
-
-		  .timeline-item {
-		    position: relative;
-		    padding: 1.5rem 1.65rem 1.5rem 1.5rem;
-		    border-left: 2px solid rgba(139, 92, 246, 0.4);
-		    background: rgba(15, 23, 42, 0.52);
-		    border-radius: 0 1rem 1rem 0;
-		    border-top: 1px solid var(--line);
-		    border-right: 1px solid var(--line);
-		    border-bottom: 1px solid var(--line);
-		  }
-
-		  .timeline-item::before {
-		    content: "";
-		    position: absolute;
-		    left: -9px;
-		    top: 1.5rem;
-		    width: 14px;
-		    height: 14px;
-		    border-radius: 999px;
-		    background: linear-gradient(135deg, var(--purple), var(--cyan));
-		    box-shadow: 0 0 28px rgba(139, 92, 246, 0.7);
-		  }
-
-		  .timeline-item .meta {
-		    margin: 0.25rem 0 0.8rem;
-		    color: var(--cyan);
-		    font-size: 0.8rem;
-		    text-transform: uppercase;
-		    letter-spacing: 0.09em;
-		  }
-
-		  .timeline-item p,
-		  .timeline-item li {
-		    color: var(--muted);
-		  }
-
-		  .timeline-item ul {
-		    margin: 1rem 0 0;
-		    padding-left: 1.1rem;
-		    line-height: 1.8;
-		  }
-
-		  .resume-grid {
-		    grid-template-columns: 1.15fr 0.85fr;
-		    align-items: start;
-		  }
-
-		  .resume-panel {
-		    min-height: 100%;
-		  }
-
-		  .resume-panel ul {
-		    margin: 1rem 0 0;
-		    padding-left: 1.1rem;
-		    line-height: 1.9;
-		  }
-
-		  .resume-highlight {
-		    display: flex;
-		    align-items: center;
-		    gap: 1rem;
-		    padding: 1rem 1.1rem;
-		    border-radius: 1rem;
-		    background: rgba(8, 17, 33, 0.7);
-		    border: 1px solid rgba(148, 163, 184, 0.18);
-		    margin-top: 1rem;
-		  }
-
-		  .resume-highlight strong {
-		    display: block;
-		    font-size: 1.7rem;
-		    line-height: 1;
-		    color: #f8fafc;
-		  }
-
-		  .resume-highlight span {
-		    color: var(--soft);
-		    font-size: 0.82rem;
-		    text-transform: uppercase;
-		    letter-spacing: 0.08em;
-		  }
-
-		  .cert-grid {
-		    grid-template-columns: repeat(2, minmax(0, 1fr));
-		  }
-
-		  .cert-item {
-		    list-style: none;
-		  }
-
-		  .cert-item strong {
-		    display: block;
-		    color: #f8fafc;
-		    margin-bottom: 0.35rem;
-		  }
-
-		  .contact-box {
-		    padding: 2rem;
-		    border-radius: 1.6rem;
-		    border: 1px solid rgba(148, 163, 184, 0.22);
-		    background: linear-gradient(180deg, rgba(30, 27, 75, 0.82), rgba(15, 23, 42, 0.8));
-		    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.5);
-		  }
-
-		  .contact-list {
-		    margin: 1.5rem 0 0;
-		    padding: 0;
-		    list-style: none;
-		    display: grid;
-		    gap: 0.85rem;
-		    color: var(--muted);
-		  }
-
-		  .contact-list a,
-		  .resume-panel a,
-		  .cert-item a,
-		  .project-card a {
-		    color: #ddd6fe;
-		    text-decoration: none;
-		    position: relative;
-		  }
-
-		  .contact-list a::after,
-		  .resume-panel a::after,
-		  .cert-item a::after,
-		  .project-card a::after {
-		    content: "";
-		    position: absolute;
-		    left: 0;
-		    bottom: -0.12rem;
-		    width: 100%;
-		    height: 1px;
-		    background: linear-gradient(90deg, var(--purple), var(--cyan));
-		    transform: scaleX(0);
-		    transform-origin: left;
-		    transition: transform 0.2s ease;
-		  }
-
-		  .contact-list a:hover::after,
-		  .resume-panel a:hover::after,
-		  .cert-item a:hover::after,
-		  .project-card a:hover::after {
-		    transform: scaleX(1);
-		  }
-
-		  @media (max-width: 960px) {
-		    .hero {
-		      grid-template-columns: 1fr;
-		      padding-top: 4rem;
-		    }
-
-		    .project-grid,
-		    .feature-grid,
-		    .timeline,
-		    .resume-grid,
-		    .cert-grid {
-		      grid-template-columns: 1fr;
-		    }
-		  }
-
-		  @media (max-width: 640px) {
-		    .mini-stats {
-		      grid-template-columns: 1fr;
-		    }
-		  }
-		</style>
-	</head>
-	<body>
-		<div id="particles-js"></div>
-		<div class="site-shell">
-			<Header />
-			<main>
-				<section class="hero">
-					<div class="hero-copy">
-						<p class="eyebrow">Information Systems • Web Development • Operations</p>
-						<h1>Building <span class="accent">digital products</span> and service systems that move people forward.</h1>
-						<p>I’m Brandon Walker — a results-driven professional with 5+ years of software development experience and 9+ years of leadership in food safety and service management. I work across Python, C#, Java, SQL, Linux, Django, and MySQL to create efficient solutions and reliable operations.</p>
-						<div class="cta-row">
-							<a class="button primary" href="#work">View my work</a>
-							<a class="button secondary" href="https://indigo-kaylil-55.tiiny.site/Resume.pdf" target="_blank" rel="noopener noreferrer">Download resume</a>
-						</div>
-						<ul class="mini-stats">
-							<li>
-								<strong>5+</strong>
-								<span>Years software</span>
-							</li>
-							<li>
-								<strong>9+</strong>
-								<span>Years service</span>
-							</li>
-							<li>
-								<strong>85%</strong>
-								<span>BSIT complete</span>
-							</li>
-						</ul>
-					</div>
-					<div class="hero-panel">
-						<div class="panel-card">
-							<span class="status">Currently</span>
-							<h2>Quality Assurance Analyst, TELUS Digital</h2>
-							<p>Conducting quality assurance and training for AI agents while improving system reliability and performance through structured testing and process improvements.</p>
-							<ul>
-								<li>Quality assurance and AI agent training.</li>
-								<li>Testing protocols for software standards.</li>
-								<li>Scalable process improvements in a part-time role.</li>
-							</ul>
-						</div>
-					</div>
-				</section>
-
-				<section id="work" class="content-section">
-					<div class="section-shell">
-						<div class="section-header">
-							<h2 class="section-title">Selected work</h2>
-							<p>My work blends technical buildouts, digital storefronts, and service-minded execution. Here are a few standout examples from my portfolio and product work.</p>
-						</div>
-						<div class="project-grid">
-							<article class="card project-card">
-								<span class="project-badge">Full-stack</span>
-								<h3>Full-featured Linux + Django site</h3>
-								<p>Built a full-featured website from scratch on an empty Linux VM using Django, showing strong end-to-end development skills from architecture through deployment.</p>
-								<div class="tag-row">
-									<span class="tag">Django</span>
-									<span class="tag">Linux</span>
-									<span class="tag">Full-stack</span>
-								</div>
-								<a class="project-link" href="https://rosscreekcabinets.com/" target="_blank" rel="noopener noreferrer">Selected web build →</a>
-							</article>
-
-							<article class="card project-card">
-								<span class="project-badge">Database</span>
-								<h3>MySQL webshop system</h3>
-								<p>Designed and implemented a MySQL database to manage user accounts, authentication, inventory, pricing, and transactions for an online store workflow.</p>
-								<div class="tag-row">
-									<span class="tag">MySQL</span>
-									<span class="tag">SQL</span>
-									<span class="tag">Auth</span>
-								</div>
-								<a class="project-link" href="https://sanctumnetwork.com/" target="_blank" rel="noopener noreferrer">Business storefront →</a>
-							</article>
-
-							<article class="card project-card">
-								<span class="project-badge">Product</span>
-								<h3>Bubble Float app experience</h3>
-								<p>Developed a music app concept with visual themes, library sync, and polished interaction design for a premium entertainment experience.</p>
-								<div class="tag-row">
-									<span class="tag">Android</span>
-									<span class="tag">UI/UX</span>
-									<span class="tag">Music</span>
-								</div>
-								<a class="project-link" href="https://sanctumnetwork.com/products/31" target="_blank" rel="noopener noreferrer">View product →</a>
-							</article>
-						</div>
-					</div>
-				</section>
-
-				<section class="content-section">
-					<div class="section-shell">
-						<div class="section-header">
-							<h2 class="section-title">How I work</h2>
-						</div>
-						<div class="feature-grid">
-							<div class="feature">
-								<div class="feature-icon">⚙️</div>
-								<h3>Systems thinking</h3>
-								<p>I build processes and digital tools that support the real-world flow of work rather than just look good on the surface.</p>
-							</div>
-							<div class="feature">
-								<div class="feature-icon">🧠</div>
-								<h3>Product + QA</h3>
-								<p>From evaluating AI agent performance to polishing web experiences, I bring a quality-first lens to product work.</p>
-							</div>
-							<div class="feature">
-								<div class="feature-icon">📈</div>
-								<h3>Operations leadership</h3>
-								<p>My background in retail and service management helps me keep teams effective, organized, and customer-focused.</p>
-							</div>
-						</div>
-					</div>
-				</section>
-
-				<section id="experience" class="content-section">
-					<div class="section-shell">
-						<div class="section-header">
-							<h2 class="section-title">Experience</h2>
-						</div>
-						<div class="timeline">
-							<div class="timeline-item">
-								<h3>Quality Assurance Analyst</h3>
-								<p class="meta">TELUS Digital • Remote • Feb 2024 – Present</p>
-								<ul>
-									<li>Conduct quality assurance and training for AI agents, improving system reliability and performance.</li>
-									<li>Develop and implement testing protocols to ensure software meets stringent standards.</li>
-									<li>Part-time role focused on scalable process improvements.</li>
-								</ul>
-							</div>
-							<div class="timeline-item">
-								<h3>Assistant Store Manager</h3>
-								<p class="meta">Zoner’s Pizza Wings & Waffles • Jul 2020 – Mar 2025</p>
-								<ul>
-									<li>Led employee training programs and streamlined inventory management using Microsoft Excel.</li>
-									<li>Oversaw production of pizzas (10"–24"), calzones, and strombolis in a fast-paced environment.</li>
-									<li>Ensured meticulous cleaning of prep and production areas to maintain high standards.</li>
-								</ul>
-							</div>
-							<div class="timeline-item">
-								<h3>Walmart Associate</h3>
-								<p class="meta">Walmart Supercenter • Dec 2018 – Jul 2020</p>
-								<ul>
-									<li>Managed tasks across Deli, Produce, Bakery, and Meat departments, ensuring food safety compliance.</li>
-									<li>Performed frying, baking, and packaging of meats, bread, and cakes using commercial equipment.</li>
-									<li>Maintained sanitation standards, including operation of a commercial meat slicer.</li>
-								</ul>
-							</div>
-							<div class="timeline-item">
-								<h3>Assistant Store Manager</h3>
-								<p class="meta">Zoner’s Pizza Wings & Waffles • Mar 2016 – Dec 2018</p>
-								<ul>
-									<li>Directed employee training and optimized inventory processes with Microsoft Excel.</li>
-									<li>Managed high-volume production of pizzas (10"–24"), calzones, and strombolis.</li>
-									<li>Ensured thorough cleaning of prep and production areas to uphold hygiene standards.</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</section>
-
-				<section id="resume" class="content-section">
-					<div class="section-shell">
-						<div class="section-header">
-							<h2 class="section-title">Resume at a glance</h2>
-						</div>
-						<div class="resume-grid">
-							<div class="resume-panel">
-								<h3>Core strengths</h3>
-								<ul>
-									<li>Python, C#, Java, SQL, Linux, Django, MySQL, Git, APIs, and software development fundamentals.</li>
-									<li>Full-stack web product work, including digital storefronts, portals, and polished brand experiences.</li>
-									<li>Operations leadership, team training, customer service, inventory management, and process improvement.</li>
-									<li>Information Technology degree in progress with real-world management experience.</li>
-								</ul>
-								<div class="resume-highlight">
-									<div>
-										<strong>BS</strong>
-										<span>Information Technology</span>
-									</div>
-									<div>
-										<strong>GA</strong>
-										<span>Authorized to work</span>
-									</div>
-								</div>
-							</div>
-							<div class="resume-panel">
-								<h3>Career snapshot</h3>
-								<ul>
-									<li><strong>Education:</strong> Bachelor of Science in Information Technology, Middle Georgia University, 85% complete.</li>
-									<li><strong>Focus:</strong> Service operations, QA, full-stack development, and process improvement.</li>
-									<li><strong>Locations:</strong> Based in Blackshear, GA; open to relocation anywhere and authorized to work in the US.</li>
-									<li><strong>Resume:</strong> <a href="https://indigo-kaylil-55.tiiny.site/Resume.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a></li>
-								</ul>
-								<a class="button primary" href="https://indigo-kaylil-55.tiiny.site/Resume.pdf" target="_blank" rel="noopener noreferrer" style="margin-top: 1.5rem; width: fit-content;">Download full resume</a>
-							</div>
-						</div>
-					</div>
-				</section>
-
-				<section class="content-section">
-					<div class="section-shell">
-						<div class="section-header">
-							<h2 class="section-title">Certifications</h2>
-						</div>
-						<div class="cert-grid">
-							<ul class="cert-item">
-								<strong>Situational Leadership</strong>
-								<li><a href="https://situational.com/what-we-do/curriculum/situational-leadership-curriculum/situational-leadership-essentials/" target="_blank" rel="noopener noreferrer">People, Pride, Profit methodology and adaptive leadership training.</a></li>
-							</ul>
-							<ul class="cert-item">
-								<strong>ServSafe Food Handler</strong>
-								<li>Certification in safety, sanitation, and operational standards with active coverage through April 2020.</li>
-							</ul>
-							<ul class="cert-item">
-								<strong>Microsoft PowerPoint 2010</strong>
-								<li>Practical experience creating presentations and operational communication materials.</li>
-							</ul>
-							<ul class="cert-item">
-								<strong>Driver’s License</strong>
-								<li>Georgia driver’s license and ability to work with operational flexibility.</li>
-							</ul>
-						</div>
-					</div>
-				</section>
-
-				<section class="content-section">
-					<div class="section-shell">
-						<div class="contact-box">
-							<h2 class="section-title" style="margin-bottom: 0.5rem;">Let’s connect</h2>
-							<p style="margin: 0; color: var(--muted);">I’m open to product, web, QA, service operations, and team-building opportunities. If you want to collaborate, hire, or just talk shop, I’d love to hear from you.</p>
-							<ul class="contact-list">
-								<li>Email: <a href="mailto:blwaterwind@gmail.com">blwaterwind@gmail.com</a></li>
-								<li>Portfolio: <a href="https://brandonwalkers.com/" target="_blank" rel="noopener noreferrer">brandonwalkers.com</a></li>
-								<li>Phone: <a href="tel:+19127228884">+1 912-722-8884</a></li>
-								<li>GitHub: <a href="https://github.com/Water-Wind-Official" target="_blank" rel="noopener noreferrer">Water-Wind-Official</a></li>
-								<li>Discord: <a href="https://discord.com/users/water_wind_" target="_blank" rel="noopener noreferrer">water_wind_</a></li>
-								<li>Community: <a href="https://discord.gg/G9baugNyvD" target="_blank" rel="noopener noreferrer">Sanctum Network</a></li>
-							</ul>
-						</div>
-					</div>
-				</section>
-			</main>
-			<Footer />
-		</div>
-
-		<script>
-		  let particlesInitialized = false;
-
-		  function initializeParticles() {
-		    if (particlesInitialized) return;
-
-		    if (typeof window.particlesJS === 'undefined') {
-		      return false;
-		    }
-
-		    const container = document.getElementById('particles-js');
-		    if (!container) {
-		      return false;
-		    }
-
-		    try {
-		      particlesJS('particles-js', {
-		        particles: {
-		          number: { value: 75, density: { enable: true, value_area: 900 } },
-		          color: { value: '#8b5cf6' },
-		          shape: { type: 'circle' },
-		          opacity: {
-		            value: 0.45,
-		            random: true,
-		            anim: { enable: true, speed: 1, opacity_min: 0.18, sync: false }
-		          },
-		          size: {
-		            value: 2.5,
-		            random: true,
-		            anim: { enable: true, speed: 18, size_min: 1, sync: false }
-		          },
-		          line_linked: {
-		            enable: true,
-		            distance: 160,
-		            color: '#8b5cf6',
-		            opacity: 0.28,
-		            width: 1
-		          },
-		          move: {
-		            enable: true,
-		            speed: 2.2,
-		            direction: 'none',
-		            random: true,
-		            straight: false,
-		            out_mode: 'out',
-		            bounce: false
-		          }
-		        },
-		        interactivity: {
-		          detect_on: 'canvas',
-		          events: {
-		            onhover: { enable: true, mode: 'grab' },
-		            onclick: { enable: true, mode: 'push' },
-		            resize: true
-		          },
-		          modes: {
-		            grab: { distance: 180, line_linked: { opacity: 1 } },
-		            push: { particles_nb: 3 }
-		          }
-		        },
-		        retina_detect: true
-		      });
-		      particlesInitialized = true;
-		      return true;
-		    } catch (error) {
-		      console.error('Error initializing particles:', error);
-		      return false;
-		    }
-		  }
-
-		  function tryInitialize() {
-		    if (initializeParticles()) {
-		      return;
-		    }
-		    setTimeout(() => {
-		      if (!particlesInitialized) {
-		        initializeParticles();
-		      }
-		    }, 150);
-		  }
-
-		  document.addEventListener('DOMContentLoaded', () => {
-		    const script = document.getElementById('particles-script');
-		    if (script) {
-		      if (script.readyState === 'complete' || script.readyState === 'loaded') {
-		        tryInitialize();
-		      } else {
-		        script.onload = tryInitialize;
-		        script.onerror = () => {
-		          console.error('Failed to load particles.js - background visual may not work');
-		        };
-		      }
-		    }
-		    tryInitialize();
-		  });
-
-		  window.addEventListener('load', () => {
-		    if (!particlesInitialized) {
-		      tryInitialize();
-		    }
-
-		    const sections = document.querySelectorAll('.content-section');
-		    const observer = new IntersectionObserver((entries) => {
-		      entries.forEach((entry) => {
-		        if (entry.isIntersecting) {
-		          entry.target.classList.add('visible');
-		          observer.unobserve(entry.target);
-		        }
-		      });
-		    }, { threshold: 0.12 });
-
-		    sections.forEach((section) => observer.observe(section));
-		  });
-		</script>
-	</body>
-</html>
+<SiteLayout class="ocean-home">
+  <section class="ocean-hero" aria-labelledby="hero-title">
+    <OceanScene />
+    <div class="ocean-hero-content container">
+      <p class="eyebrow hero-kicker">
+        <span></span> A DEVELOPER. AN EXPLORER. A DIFFERENT PERSPECTIVE.{" "}
+        <span></span>
+      </p>
+      <h1 id="hero-title">
+        <span>Beyond</span>
+        <span class="hero-title-depth">the surface.</span>
+      </h1>
+      <p class="ocean-intro">
+        I’m <strong>Brandon Walker.</strong> I turn curiosity into digital
+        <br class="desktop-break" /> experiences with a world of possibility
+        beneath them.
+      </p>
+      <div class="ocean-actions">
+        <a class="button button-mint" href="#work">
+          Explore my work <Icon name="diagonal" size={18} />
+        </a>
+        <a class="button button-outline" href={RESUME_URL} download>
+          Download résumé <Icon name="down" size={17} />
+        </a>
+      </div>
+    </div>
+    <div class="ocean-hero-rail container">
+      <a href="#work" class="ocean-scroll">
+        <span class="scroll-circle">↓</span>
+        <span>
+          SCROLL TO
+          <br />
+          GO DEEPER
+        </span>
+      </a>
+      <span class="ocean-location">
+        <span class="status-dot"></span> GEORGIA, EARTH · OPEN TO WHAT’S NEXT
+      </span>
+      <button class="hyperspace-button" hidden>
+        <Icon name="star" size={15} />
+        <span>Ride the wave</span>
+      </button>
+    </div>
+    <div class="hero-depth-marker" aria-hidden="true">
+      <span>CREATIVE DEPTH</span>
+      <i></i>
+      <span>∞</span>
+    </div>
+  </section>
+  <div class="ocean-current-band">
+    <div class="container expertise-strip" aria-label="Areas of focus">
+      <span>WEB DEVELOPMENT</span>
+      <Icon name="star" size={17} />
+      <span>DIGITAL UX</span>
+      <Icon name="star" size={17} />
+      <span>QUALITY ASSURANCE</span>
+      <Icon name="star" size={17} />
+      <span>WORLD BUILDING</span>
+    </div>
+  </div>
+  <section
+    class="section container selected-work"
+    id="work"
+    aria-labelledby="work-title"
+  >
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow section-number">
+          <span>01</span> / SELECTED EXPLORATIONS
+        </p>
+        <h2 id="work-title">
+          Made of curiosity.
+          <br />
+          <span class="tide-accent">Built to be experienced.</span>
+        </h2>
+      </div>
+      <div class="section-heading-aside">
+        <p>
+          From useful little tools to
+          <br />
+          entire worlds to get lost in.
+        </p>
+        <a class="text-link" href="/work">
+          Explore all {projects.length} projects{" "}
+          <Icon name="diagonal" size={18} />
+        </a>
+      </div>
+    </div>
+    <div class="project-grid featured-projects">
+      {projects.slice(0, 3).map((project, index) => (
+        <ProjectCard project={project} index={index} />
+      ))}
+    </div>
+  </section>
+  <WaveDivider label="CURIOSITY IS A CURRENT. FOLLOW IT." />
+  <section class="ocean-manifesto container" aria-labelledby="manifesto-title">
+    <p class="eyebrow section-number">
+      <Icon name="star" size={20} /> THE THREAD THROUGH EVERYTHING
+    </p>
+    <h2 id="manifesto-title">
+      The best digital spaces
+      <br />
+      make you <span class="tide-accent">feel something.</span>
+    </h2>
+    <p>
+      A sense of discovery. A moment of clarity. A reason to stay.
+      <br class="desktop-break" /> That’s what I’m here to build.
+    </p>
+  </section>
+  <section
+    class="section container about-section"
+    id="about"
+    aria-labelledby="about-title"
+  >
+    <div class="about-portrait">
+      <img
+        src="/images/brandon-walker.webp"
+        width="800"
+        height="1067"
+        alt="Brandon Walker"
+        loading="lazy"
+      />
+      <div class="portrait-caption">
+        <span>BRANDON WALKER / THE HUMAN PART</span>
+        <Icon name="star" size={20} />
+      </div>
+      <span class="portrait-stamp" aria-hidden="true">
+        ALWAYS
+        <br />
+        EXPLORING ↗
+      </span>
+    </div>
+    <div class="about-copy">
+      <p class="eyebrow section-number">
+        <span>02</span> / BEHIND THE SCREEN
+      </p>
+      <h2 id="about-title">
+        An open mind.
+        <br />
+        <span class="tide-accent">An endless horizon.</span>
+      </h2>
+      <p>
+        I’ve always been drawn to spaces that bring people together. Sometimes
+        that’s a website. Sometimes it’s an imagined world. Always, it’s about
+        the experience.
+      </p>
+      <p>
+        I’m studying Information Technology at Middle Georgia State University,
+        specializing in digital UX, and working in quality assurance at TELUS
+        Digital. Years of leading people taught me to build with care.
+      </p>
+      <a class="text-link" href="/about">
+        Meet the person behind the work <Icon name="diagonal" size={18} />
+      </a>
+      <div class="about-facts">
+        <div>
+          <strong>
+            100<span>+</span>
+          </strong>
+          <span>COLLEGE CREDITS</span>
+        </div>
+        <div>
+          <strong>
+            14<span>+</span>
+          </strong>
+          <span>CREW MEMBERS TRAINED & MANAGED</span>
+        </div>
+        <div>
+          <strong>∞</strong>
+          <span>CURIOSITY</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <WaveDivider flip />
+  <section
+    class="section container experience-section"
+    id="experience"
+    aria-labelledby="experience-title"
+  >
+    <div class="section-heading" id="resume">
+      <div>
+        <p class="eyebrow section-number">
+          <span>03</span> / THE JOURNEY SO FAR
+        </p>
+        <h2 id="experience-title">
+          Different experiences.
+          <br />
+          <span class="tide-accent">One forward current.</span>
+        </h2>
+      </div>
+      <a class="text-link" href="/resume">
+        My full résumé <Icon name="diagonal" size={18} />
+      </a>
+    </div>
+    <div class="experience-row">
+      <span class="experience-date">FEB 2024 — PRESENT</span>
+      <div>
+        <h3>Quality Assurance Specialist</h3>
+        <p>TELUS Digital</p>
+      </div>
+      <span class="experience-tag">QUALITY & CARE</span>
+      <Icon name="star" size={24} />
+    </div>
+    <div class="experience-row">
+      <span class="experience-date">JUL 2020 — MAR 2025</span>
+      <div>
+        <h3>Assistant Store Manager</h3>
+        <p>Zoner’s Pizza</p>
+      </div>
+      <span class="experience-tag">PEOPLE & OPERATIONS</span>
+      <Icon name="star" size={24} />
+    </div>
+    <div class="experience-row">
+      <span class="experience-date">MAR 2024 — PRESENT</span>
+      <div>
+        <h3>
+          Bachelor’s in Information Technology{" "}
+          <span class="in-progress">In progress</span>
+        </h3>
+        <p>Middle Georgia State University</p>
+      </div>
+      <span class="experience-tag">ALWAYS LEARNING</span>
+      <Icon name="star" size={24} />
+    </div>
+  </section>
+  <ContactSection />
+</SiteLayout>

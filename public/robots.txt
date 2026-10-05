@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://brandonwalkers.com/sitemap-index.xml
