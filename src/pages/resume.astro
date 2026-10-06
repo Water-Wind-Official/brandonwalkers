@@ -1,7 +1,9 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 import Icon from "../components/Icon.astro";
+import ProjectCard from "../components/ProjectCard.astro";
 import { RESUME_URL } from "../consts";
+import { projects } from "../data/portfolio";
 ---
 
 <SiteLayout
@@ -40,6 +42,14 @@ import { RESUME_URL } from "../consts";
       </a>
     </aside>
     <div>
+      <section class="resume-group" aria-labelledby="projects">
+        <h2 id="projects">Projects</h2>
+        <div class="project-grid featured-projects">
+          {projects.slice(0, 4).map((project, index) => (
+            <ProjectCard project={project} index={index} />
+          ))}
+        </div>
+      </section>
       <section class="resume-group" aria-labelledby="work-history">
         <h2 id="work-history">Work history</h2>
         <article class="resume-entry">

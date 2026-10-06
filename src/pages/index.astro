@@ -13,24 +13,41 @@ import { RESUME_URL } from "../consts";
   <section class="ocean-hero" aria-labelledby="hero-title">
     <OceanScene />
     <div class="ocean-hero-content container">
-      <p class="eyebrow hero-kicker">
-        <span></span> DEVELOPER • UX • QUALITY • OPERATIONS <span></span>
-      </p>
-      <h1 id="hero-title">
-        <span>Brandon Walker.</span>
-        <span class="hero-title-depth">Thoughtful digital work.</span>
-      </h1>
-      <p class="ocean-intro">
-        I build polished digital experiences, dependable systems, and useful
-        tools that connect strong design with real-world execution.
-      </p>
-      <div class="ocean-actions">
-        <a class="button button-mint" href="#work">
-          Explore my work <Icon name="diagonal" size={18} />
-        </a>
-        <a class="button button-outline" href={RESUME_URL} download>
-          Download résumé <Icon name="down" size={17} />
-        </a>
+      <div class="ocean-hero-grid">
+        <div class="ocean-hero-copy">
+          <p class="eyebrow hero-kicker">
+            <span></span> DEVELOPER • UX • QUALITY • OPERATIONS <span></span>
+          </p>
+          <h1 id="hero-title">
+            <span>Walkers Digital</span>
+            <span class="hero-title-depth">Thoughtful digital work.</span>
+          </h1>
+          <p class="ocean-intro">
+            I build polished digital experiences, dependable systems, and useful
+            tools that connect strong design with real-world execution.
+          </p>
+          <div class="ocean-actions">
+            <a class="button button-mint" href="#work">
+              Explore my work <Icon name="diagonal" size={18} />
+            </a>
+            <a class="button button-outline" href={RESUME_URL} download>
+              Download résumé <Icon name="down" size={17} />
+            </a>
+          </div>
+        </div>
+        <div class="about-portrait hero-portrait">
+          <img
+            src="/images/brandon-walker.webp"
+            width="800"
+            height="1067"
+            alt="Brandon Walker"
+            loading="eager"
+          />
+          <div class="portrait-caption">
+            <span>BRANDON WALKER / BUILDER</span>
+            <Icon name="star" size={20} />
+          </div>
+        </div>
       </div>
     </div>
     <div class="ocean-hero-rail container">
@@ -78,9 +95,9 @@ import { RESUME_URL } from "../consts";
           <span>01</span> / SELECTED WORK
         </p>
         <h2 id="work-title">
-          Built with purpose.
+          Custom solutions
           <br />
-          <span class="tide-accent">Designed to work.</span>
+          <span class="tide-accent">for emergent needs.</span>
         </h2>
       </div>
       <div class="section-heading-aside">

@@ -3,7 +3,7 @@ import Icon from "./Icon.astro";
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const links = [
   { href: "/work", label: "Work" },
-  { href: "/about", label: "About" },
+  { href: "/about", label: "Connect" },
   { href: "/resume", label: "Experience" },
 ];
 ---
@@ -41,9 +41,9 @@ const links = [
         </a>
       ))}
       <a
-        href="/socials"
+        href="/about"
         class="nav-contact"
-        aria-current={path === "/socials" ? "page" : undefined}
+        aria-current={path === "/about" ? "page" : undefined}
       >
         Let’s connect <Icon name="diagonal" size={15} />
       </a>
