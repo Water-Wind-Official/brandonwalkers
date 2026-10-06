@@ -40,6 +40,14 @@ import { projects } from "../data/portfolio";
       <a href={RESUME_URL} download class="button button-mint">
         Download PDF <Icon name="down" size={16} />
       </a>
+      <details class="resume-preview-panel">
+        <summary>Preview résumé</summary>
+        <iframe
+          src={RESUME_URL}
+          title="Brandon Walker resume preview"
+          loading="lazy"
+        ></iframe>
+      </details>
     </aside>
     <div>
       <section class="resume-group" aria-labelledby="projects">
@@ -52,6 +60,14 @@ import { projects } from "../data/portfolio";
       </section>
       <section class="resume-group" aria-labelledby="work-history">
         <h2 id="work-history">Work history</h2>
+        <article class="resume-entry">
+          <h3>TestOut Security Pro</h3>
+          <div class="entry-meta">
+            <span>Certification</span>
+            <span>2025</span>
+          </div>
+          <p>TestOut Security Pro</p>
+        </article>
         <article class="resume-entry">
           <h3>Quality Assurance Specialist</h3>
           <div class="entry-meta">
