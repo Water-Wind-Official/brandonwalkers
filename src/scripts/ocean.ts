@@ -33,15 +33,17 @@ function initializeOcean() {
       vec2 sampleUV = (uv - 0.5) * cover + 0.5;
       float water = 1.0 - smoothstep(0.27, 0.47, sampleUV.y);
       float nearWater = 1.0 - smoothstep(0.0, 0.44, sampleUV.y);
-      float flow = sin(sampleUV.y * 43.0 - time * 0.65 + sampleUV.x * 8.0);
-      float swell = sin(sampleUV.x * 21.0 + time * 0.43 + flow * 0.45);
-      sampleUV.x += water * (flow * 0.0025 + sin(sampleUV.y * 93.0 + time * 0.8) * 0.0007) * (1.0 + surge * 3.2);
-      sampleUV.y += water * swell * (0.0015 + nearWater * 0.0015) * (1.0 + surge * 2.5);
-      float ripple = sin(distance(uv, pointer) * 28.0 - time * 1.1) * exp(-distance(uv, pointer) * 5.0);
-      sampleUV += vec2(ripple * 0.0016, ripple * 0.001) * water;
-      sampleUV = (sampleUV - 0.5) * (1.0 - surge * 0.025) + 0.5;
+      float flow = sin(sampleUV.y * 50.0 - time * 1.2 + sampleUV.x * 11.0);
+      float swell = sin(sampleUV.x * 27.0 + time * 0.9 + flow * 0.8);
+      sampleUV.x += water * (flow * 0.0048 + sin(sampleUV.y * 120.0 + time * 1.4) * 0.0013) * (1.0 + surge * 3.9);
+      sampleUV.y += water * swell * (0.003 + nearWater * 0.0024) * (1.0 + surge * 3.2);
+      float ripple = sin(distance(uv, pointer) * 34.0 - time * 1.5) * exp(-distance(uv, pointer) * 5.8);
+      sampleUV += vec2(ripple * 0.0023, ripple * 0.0015) * water;
+      sampleUV = (sampleUV - 0.5) * (1.0 - surge * 0.03) + 0.5;
       vec3 color = texture2D(ocean, clamp(sampleUV, 0.002, 0.998)).rgb;
-      color += vec3(0.01, 0.025, 0.033) * surge * water;
+      vec3 blueTint = vec3(0.10, 0.22, 0.42);
+      color = mix(color, color + blueTint * (0.55 + water * 0.75), 0.28);
+      color += vec3(0.018, 0.042, 0.065) * surge * water;
       gl_FragColor = vec4(color, 1.0);
     }
   `;
