@@ -30,14 +30,14 @@ export const projects: Project[] = [
     action: "Explore the app",
   },
   {
-    title: "Ross Creek Cabinets",
-    category: "Web",
+    title: "CurseForge Projects",
+    category: "Worlds",
     description:
-      "A home on the web for a custom cabinetry business in Waycross, Georgia. Craft, services, and a clear path to connect.",
-    href: "https://rosscreekcabinets.com/",
-    tags: ["Web development", "Local business"],
-    art: "ross",
-    action: "Visit the website",
+      "My Minecraft modpacks, worlds, and community projects shared on CurseForge for players to explore and download.",
+    href: "https://www.curseforge.com/members/water_wind_/projects",
+    tags: ["Minecraft", "Modding", "Community"],
+    art: "multiverse",
+    action: "View my projects",
   },
   {
     title: "Sci-Fi Multiverse",

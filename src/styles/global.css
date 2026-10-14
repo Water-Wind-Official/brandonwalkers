@@ -776,8 +776,15 @@ h3 {
   aspect-ratio: 1/1.06;
   object-fit: cover;
   object-position: center 30%;
-  filter: saturate(0.65);
+  filter: blur(1.2px) saturate(0.7) brightness(0.94);
+  opacity: 0.94;
   border-radius: 2px;
+  transition: filter 320ms ease, transform 320ms ease, opacity 320ms ease;
+}
+.about-portrait img:hover {
+  filter: blur(0) saturate(1.08) brightness(1);
+  opacity: 1;
+  transform: scale(1.01);
 }
 .portrait-caption {
   display: flex;
